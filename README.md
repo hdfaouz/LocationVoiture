@@ -94,3 +94,4 @@ Validation ou refus des demandes de réservation
 ![Diagrammes de classe](Diagrammes/diagramme%20de%20classe.png)
 **_Diagramme de sequence**_ 
 ![Diagrammes de séquence](Diagrammes/diagramme%20de%20sequence.png)
+![Diagrammes de séquence](Diagrammes/diagramme%20de%20sequence%202.png)
