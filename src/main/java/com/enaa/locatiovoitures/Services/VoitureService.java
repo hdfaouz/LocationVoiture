@@ -6,6 +6,8 @@ import com.enaa.locatiovoitures.Model.Voiture;
 import com.enaa.locatiovoitures.Repositories.VoitureRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VoitureService {
     private final VoitureMap voitureMap;
@@ -21,5 +23,10 @@ public class VoitureService {
         Voiture saveVoiture = voitureRepository.save(voiture);
         return voitureMap.toDto(saveVoiture);
 
+    }
+
+    public List<VoitureDto> getAllVoitures(){
+    List<Voiture> voitures = voitureRepository.findAll();
+    return voitureMap.toDTOs(voitures);
     }
 }
