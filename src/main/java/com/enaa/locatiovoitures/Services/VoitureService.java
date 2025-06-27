@@ -33,4 +33,20 @@ public class VoitureService {
     public void deletVoiture(Long id){
         voitureRepository.deleteById(id);
     }
+
+    public VoitureDto update(Long id, VoitureDto dto){
+       Voiture voiture = voitureRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Voiture not found"));
+
+        voiture.isAvailable(dto.isAvailable());
+        voiture.setCategory(dto.getCategory());
+        voiture.setBrand(dto.getBrand());
+        voiture.setModel(dto.getModel());
+        voiture.setPricePerDay(dto.getPricePerDay());
+        voiture.setImageUrl(dto.getImageUrl());
+
+       Voiture savedVoiture = voitureRepository.save(voiture);
+
+        return voitureMap.toDto(savedVoiture);
+    }
 }

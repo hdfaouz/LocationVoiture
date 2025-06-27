@@ -1,10 +1,6 @@
 package com.enaa.locatiovoitures.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 
@@ -74,8 +70,8 @@ public class Voiture {
         this.pricePerDay = pricePerDay;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isAvailable(boolean available) {
+        return this.available;
     }
 
     public void setAvailable(boolean available) {
