@@ -6,6 +6,8 @@ import com.enaa.locatiovoitures.Model.User;
 import com.enaa.locatiovoitures.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -22,5 +24,10 @@ public class UserService {
         User user = userMap.toEntity(dto);
         User save = userRepository.save(user);
         return userMap.toDto(save);
+    }
+
+    public List<UserDto> getAll(){
+        List<User> users = userRepository.findAll();
+        return userMap.toDTOs(users);
     }
 }
