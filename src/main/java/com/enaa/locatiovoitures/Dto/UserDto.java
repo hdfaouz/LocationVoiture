@@ -1,40 +1,19 @@
-package com.enaa.locatiovoitures.Model;
+package com.enaa.locatiovoitures.Dto;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.enaa.locatiovoitures.Model.Role;
 
-import java.util.List;
-
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long id;
+public class UserDto {
     private String email;
     private String password;
-
-    @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(Long id, String email, String password, Role role) {
-        this.id = id;
+    public UserDto(String email, String password, Role role) {
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEmail() {
