@@ -29,4 +29,8 @@ public class VoitureService {
     List<Voiture> voitures = voitureRepository.findAll();
     return voitureMap.toDTOs(voitures);
     }
+
+    public void deletVoiture(Long id){
+        voitureRepository.deleteById(id);
+    }
 }

@@ -25,4 +25,9 @@ public class VoitureController {
     public List<VoitureDto> getAllVoitures(){
         return voitureService.getAllVoitures();
     }
+
+    @DeleteMapping("/{id}")
+    public void deletVoiture( @PathVariable Long id){
+        voitureService.deletVoiture(id);
+    }
 }
