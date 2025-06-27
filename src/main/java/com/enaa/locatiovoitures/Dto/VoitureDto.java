@@ -1,18 +1,8 @@
-package com.enaa.locatiovoitures.Model;
+package com.enaa.locatiovoitures.Dto;
 
-import jakarta.persistence.*;
-import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.List;
+public class VoitureDto {
 
-@Entity
-
-public class Voiture {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long id;
     private String brand;
     private String model;
     private String category;
@@ -20,26 +10,16 @@ public class Voiture {
     private boolean available;
     private String imageUrl;
 
-
-    public Voiture() {
+    public VoitureDto() {
     }
 
-    public Voiture(Long id, String brand, String model, String category, double pricePerDay, boolean available, String imageUrl) {
-        this.id = id;
+    public VoitureDto(String brand, String model, String category, double pricePerDay, boolean available, String imageUrl) {
         this.brand = brand;
         this.model = model;
         this.category = category;
         this.pricePerDay = pricePerDay;
         this.available = available;
         this.imageUrl = imageUrl;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getBrand() {
@@ -89,9 +69,4 @@ public class Voiture {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-
-
-
-
 }

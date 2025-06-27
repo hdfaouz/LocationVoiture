@@ -13,14 +13,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
-    @Column(nullable = false)
-    private LocalDate dateDebut;
-
-    @Column(nullable = false)
-    private LocalDate dateFin;
-
-    private Double prixTotal;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private double totalPrice;
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus status = ReservationStatus.EN_ATTENTE;
