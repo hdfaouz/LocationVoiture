@@ -2,6 +2,9 @@ package com.enaa.locatiovoitures.Model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 
 public class Voiture {
@@ -15,6 +18,13 @@ public class Voiture {
     private double pricePerDay;
     private boolean available;
     private String imageUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id", nullable = false)
+    private Admin admin;
+
+    @OneToMany(mappedBy = "voiture", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations = new ArrayList<>();
 
 
     public Voiture() {

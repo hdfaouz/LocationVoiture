@@ -3,7 +3,6 @@ package com.enaa.locatiovoitures.Services;
 import com.enaa.locatiovoitures.Dto.UserDto;
 import com.enaa.locatiovoitures.Mappers.UserMap;
 import com.enaa.locatiovoitures.Model.User;
-import com.enaa.locatiovoitures.Model.Voiture;
 import com.enaa.locatiovoitures.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
