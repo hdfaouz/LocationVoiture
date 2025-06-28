@@ -16,4 +16,19 @@ public class Admin extends User{
     @OneToMany(mappedBy = "adminConfirmateur")
     private List<Reservation> reservationsConfirmees = new ArrayList<>();
 
+    public List<Voiture> getVoitures() {
+        return voitures;
+    }
+
+    public void setVoitures(List<Voiture> voitures) {
+        this.voitures = voitures;
+    }
+
+    public List<Reservation> getReservationsConfirmees() {
+        return reservationsConfirmees;
+    }
+
+    public void setReservationsConfirmees(List<Reservation> reservationsConfirmees) {
+        this.reservationsConfirmees = reservationsConfirmees;
+    }
 }
