@@ -29,4 +29,8 @@ public class ReservationService {
         List<Reservation> reservation = reservationRepository.findAll();
         return reservationMap.toDTOs(reservation);
     }
+
+    public void deletReservation(Long id){
+        reservationRepository.deleteById(id);
+    }
 }
