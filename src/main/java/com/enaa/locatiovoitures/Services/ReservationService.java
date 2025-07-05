@@ -1,8 +1,10 @@
 package com.enaa.locatiovoitures.Services;
 
 import com.enaa.locatiovoitures.Dto.ReservationDto;
+import com.enaa.locatiovoitures.Dto.VoitureDto;
 import com.enaa.locatiovoitures.Mappers.ReservationMap;
 import com.enaa.locatiovoitures.Model.Reservation;
+import com.enaa.locatiovoitures.Model.Voiture;
 import com.enaa.locatiovoitures.Repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,18 @@ public class ReservationService {
 
     public void deletReservation(Long id){
         reservationRepository.deleteById(id);
+    }
+    public ReservationDto update(Long id, ReservationDto dto){
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("reservation not found"));
+
+        reservation.setStartDate(dto.getStartDate());
+        reservation.setEndDate(dto.getEndDate());
+        reservation.setTotalPrice(dto.getTotalPrice());
+
+
+       Reservation savedReservation = reservationRepository.save(reservation);
+
+        return reservationMap.toDto(savedReservation);
     }
 }

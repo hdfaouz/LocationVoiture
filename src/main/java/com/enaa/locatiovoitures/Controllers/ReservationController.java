@@ -29,4 +29,9 @@ public class ReservationController {
     public void delet(@PathVariable Long id){
        reservationService.deletReservation(id);
     }
+
+    @PutMapping("/{id}")
+    public ReservationDto update(@PathVariable Long id, @RequestBody ReservationDto reservationDto){
+        return reservationService.update(id,reservationDto);
+    }
 }
