@@ -6,6 +6,8 @@ import com.enaa.locatiovoitures.Model.Reservation;
 import com.enaa.locatiovoitures.Repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReservationService {
 
@@ -21,5 +23,10 @@ public class ReservationService {
         Reservation reservation = reservationMap.toEntity(reservationDto);
         Reservation saveReservation = reservationRepository.save(reservation);
         return reservationMap.toDto(saveReservation);
+    }
+
+    public List<ReservationDto> getAll(){
+        List<Reservation> reservation = reservationRepository.findAll();
+        return reservationMap.toDTOs(reservation);
     }
 }
