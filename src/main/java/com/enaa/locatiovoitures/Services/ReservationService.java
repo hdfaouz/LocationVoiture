@@ -39,7 +39,7 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("reservation not found"));
 
-        reservation.setStartDate(dto.getStartDate());
+
         reservation.setEndDate(dto.getEndDate());
         reservation.setTotalPrice(dto.getTotalPrice());
 

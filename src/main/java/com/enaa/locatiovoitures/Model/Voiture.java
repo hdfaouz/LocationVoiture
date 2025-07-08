@@ -1,12 +1,15 @@
 package com.enaa.locatiovoitures.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class Voiture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,19 +29,6 @@ public class Voiture {
     @OneToMany(mappedBy = "voiture", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
 
-
-    public Voiture() {
-    }
-
-    public Voiture(Long id, String brand, String model, String category, double pricePerDay, boolean available, String imageUrl) {
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.category = category;
-        this.pricePerDay = pricePerDay;
-        this.available = available;
-        this.imageUrl = imageUrl;
-    }
 
     public Long getId() {
         return id;
