@@ -2,8 +2,12 @@ package com.enaa.locatiovoitures.Services;
 
 import com.enaa.locatiovoitures.Dto.VoitureDto;
 import com.enaa.locatiovoitures.Mappers.VoitureMap;
+import com.enaa.locatiovoitures.Model.Admin;
+import com.enaa.locatiovoitures.Model.User;
 import com.enaa.locatiovoitures.Model.Voiture;
 import com.enaa.locatiovoitures.Repositories.VoitureRepository;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +23,9 @@ public class VoitureService {
     }
 
     public VoitureDto ajouterVoiture(VoitureDto voitureDto){
+        Admin admin = (Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Voiture voiture = voitureMap.toEntity(voitureDto);
+        voiture.setAdmin(admin);
         Voiture saveVoiture = voitureRepository.save(voiture);
         return voitureMap.toDto(saveVoiture);
 

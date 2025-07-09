@@ -86,8 +86,15 @@ public class Voiture {
         this.imageUrl = imageUrl;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
 
+    public Admin getAdmin() {
+        return admin;
+    }
 
-
-
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 }
