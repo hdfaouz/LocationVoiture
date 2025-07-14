@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers("/voiture/**").hasAuthority(Role.ADMIN.name())
+                .requestMatchers("/reservation/**").hasAnyRole("ADMIN","CLIENT")
                 .anyRequest()
                 .authenticated()
                 .and()
