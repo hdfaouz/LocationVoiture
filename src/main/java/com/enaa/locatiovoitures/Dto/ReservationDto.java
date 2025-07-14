@@ -1,25 +1,23 @@
 package com.enaa.locatiovoitures.Dto;
 
 import com.enaa.locatiovoitures.Model.ReservationStatus;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReservationDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private double totalPrice;
     private ReservationStatus status;
+    private Long clientId;
+    private Long voitureId;
 
-    public ReservationDto() {
-    }
 
-    public ReservationDto(LocalDate startDate, LocalDate endDate, double totalPrice, ReservationStatus status) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalPrice = totalPrice;
-        this.status = status;
-    }
 
     public LocalDate getStartDate() {
         return startDate;
@@ -51,5 +49,21 @@ public class ReservationDto {
 
     public void setStatus(ReservationStatus status) {
         this.status = status;
+    }
+
+    public Long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
+    }
+
+    public Long getVoitureId() {
+        return voitureId;
+    }
+
+    public void setVoitureId(Long voitureId) {
+        this.voitureId = voitureId;
     }
 }
