@@ -15,6 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mockStatic;
@@ -81,4 +85,46 @@ public class VoitureTest {
             assertEquals("Camry", result.getCategory());
         }
     }
-}
+
+        @Test
+        void getAllVoitures() {
+
+            Voiture voiture1 = new Voiture();
+            voiture1.setId(1L);
+            voiture1.setModel("Toyota");
+            voiture1.setCategory("Sedan");
+
+            Voiture voiture2 = new Voiture();
+            voiture2.setId(2L);
+            voiture2.setModel("Honda");
+            voiture2.setCategory("SUV");
+
+            List<Voiture> voitures = Arrays.asList(voiture1, voiture2);
+
+            VoitureDto voitureDto1 = new VoitureDto();
+            voitureDto1.setBrand("Toyota");
+            voitureDto1.setCategory("Sedan");
+
+            VoitureDto voitureDto2 = new VoitureDto();
+            voitureDto2.setBrand("Honda");
+            voitureDto2.setCategory("SUV");
+
+            List<VoitureDto> expectedDtos = Arrays.asList(voitureDto1, voitureDto2);
+
+           //Configuration
+            when(voitureRepository.findAll()).thenReturn(voitures);
+            when(voitureMap.toDTOs(voitures)).thenReturn(expectedDtos);
+
+            // Exécution
+            List<VoitureDto> result = voitureService.getAllVoitures();
+
+            assertNotNull(result);
+            assertEquals(2, result.size());
+            assertEquals("Toyota", result.get(0).getBrand());
+            assertEquals("Sedan", result.get(0).getCategory());
+            assertEquals("Honda", result.get(1).getBrand());
+            assertEquals("SUV", result.get(1).getCategory());
+        }
+
+    }
+
