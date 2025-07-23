@@ -21,8 +21,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class VoitureTest {
@@ -125,6 +124,18 @@ public class VoitureTest {
             assertEquals("Honda", result.get(1).getBrand());
             assertEquals("SUV", result.get(1).getCategory());
         }
+
+    @Test
+    void deletVoiture() {
+        // Données de test
+        Long voitureId = 1L;
+
+        // Exécution
+        voitureService.deletVoiture(voitureId);
+
+        // Vérification que deleteById a été appelé avec le bon ID
+        verify(voitureRepository).deleteById(voitureId);
+    }
 
     }
 
