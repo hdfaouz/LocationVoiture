@@ -15,8 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import static org.hamcrest.Matchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mockStatic;
@@ -39,8 +37,8 @@ public class VoitureTest {
     @InjectMocks
     private VoitureService voitureService;
     @Test
-    void ajouterVoiture_DevraitRetournerVoitureDto() {
-        // Données de test
+    void ajouterVoiture() {
+
         Admin admin = new Admin();
         admin.setId(1L);
 
@@ -70,15 +68,14 @@ public class VoitureTest {
             when(securityContext.getAuthentication()).thenReturn(authentication);
             when(authentication.getPrincipal()).thenReturn(admin);
 
-            // Configuration des mocks - C'EST OBLIGATOIRE !
             when(voitureMap.toEntity(voitureDto)).thenReturn(voiture);
             when(voitureRepository.save(voiture)).thenReturn(savedVoiture);
             when(voitureMap.toDto(savedVoiture)).thenReturn(expectedDto);
 
-            // Exécution
+
             VoitureDto result = voitureService.ajouterVoiture(voitureDto);
 
-            // Vérifications
+
             assertNotNull(result);
             assertEquals("Toyota", result.getBrand());
             assertEquals("Camry", result.getCategory());
