@@ -127,13 +127,10 @@ public class VoitureTest {
 
     @Test
     void deletVoiture() {
-        // Données de test
-        Long voitureId = 1L;
 
-        // Exécution
+        Long voitureId = 1L;
         voitureService.deletVoiture(voitureId);
 
-        // Vérification que deleteById a été appelé avec le bon ID
         verify(voitureRepository).deleteById(voitureId);
     }
 
