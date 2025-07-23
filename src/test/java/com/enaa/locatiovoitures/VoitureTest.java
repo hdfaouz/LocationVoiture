@@ -39,6 +39,7 @@ public class VoitureTest {
 
     @InjectMocks
     private VoitureService voitureService;
+
     @Test
     void ajouterVoiture() {
 
@@ -110,11 +111,9 @@ public class VoitureTest {
 
             List<VoitureDto> expectedDtos = Arrays.asList(voitureDto1, voitureDto2);
 
-           //Configuration
             when(voitureRepository.findAll()).thenReturn(voitures);
             when(voitureMap.toDTOs(voitures)).thenReturn(expectedDtos);
 
-            // Exécution
             List<VoitureDto> result = voitureService.getAllVoitures();
 
             assertNotNull(result);
