@@ -43,5 +43,72 @@ public class ReservationTest {
     @InjectMocks
     private ReservationService reservationService; // Remplacez par le nom de votre service
 
+    @Test
+    void AjouterReservation() {
+        // Given
+        Long clientId = 1L;
+        Long voitureId = 2L;
+        String userEmail = "test@example.com";
 
+        ReservationDto reservationDto = new ReservationDto();
+        reservationDto.setVoitureId(voitureId);
+
+        Reservation reservation = new Reservation();
+
+        Client client = new Client();
+        client.setId(clientId);
+
+        Voiture voiture = new Voiture();
+        voiture.setId(voitureId);
+
+        Reservation savedReservation = new Reservation();
+        savedReservation.setClient(client);
+        savedReservation.setVoiture(voiture);
+
+        ReservationDto expectedDto = new ReservationDto();
+        expectedDto.setClientId(clientId);
+        expectedDto.setVoitureId(voitureId);
+
+        // Mocking UserDetails
+        UserDetails userDetails = mock(UserDetails.class);
+        when(userDetails.getUsername()).thenReturn(userEmail);
+
+        // Mocking SecurityContext
+        SecurityContext securityContext = mock(SecurityContext.class);
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getPrincipal()).thenReturn(userDetails);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+
+        // Mocking static SecurityContextHolder
+        try (MockedStatic<SecurityContextHolder> mockedSecurityContextHolder = mockStatic(SecurityContextHolder.class)) {
+            mockedSecurityContextHolder.when(SecurityContextHolder::getContext).thenReturn(securityContext);
+
+            // Mocking repository calls
+            when(reservationMap.toEntity(reservationDto)).thenReturn(reservation);
+            when(userRepository.findByEmail(userEmail)).thenReturn(client);
+            when(userRepository.findById(clientId)).thenReturn(Optional.of(client));
+            when(voitureRepository.findById(voitureId)).thenReturn(Optional.of(voiture));
+            when(reservationRepository.save(reservation)).thenReturn(savedReservation);
+            when(reservationMap.toDto(savedReservation)).thenReturn(expectedDto);
+
+            // When
+            ReservationDto result = reservationService.ajouter(reservationDto);
+
+            // Then
+            assertNotNull(result);
+            assertEquals(expectedDto, result);
+
+            // Verify interactions
+            verify(reservationMap).toEntity(reservationDto);
+            verify(userRepository).findByEmail(userEmail);
+            verify(userRepository).findById(clientId);
+            verify(voitureRepository).findById(voitureId);
+            verify(reservationRepository).save(reservation);
+            verify(reservationMap).toDto(savedReservation);
+
+            // Verify that client and voiture are set on reservation
+            assertEquals(client, reservation.getClient());
+            assertEquals(voiture, reservation.getVoiture());
+        }
+    }
 }
