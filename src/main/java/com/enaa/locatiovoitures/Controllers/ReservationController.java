@@ -21,6 +21,8 @@ public class ReservationController {
     public ReservationDto ajouter(@RequestBody ReservationDto reservationDto){
         return reservationService.ajouter(reservationDto);
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<ReservationDto> getAll(){
         return reservationService.getAll();
