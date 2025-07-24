@@ -32,18 +32,11 @@ public class ReservationService {
     }
 
     public  ReservationDto ajouter(ReservationDto reservationDto){
-        // Validation
         Reservation reservation = reservationMap.toEntity(reservationDto);
-
-        // Vérifier que le client n'est pas null après mapping
-
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         Client client = (Client) userRepository.findById(userRepository.findByEmail(user.getUsername()).getId())
                     .orElseThrow(() -> new EntityNotFoundException("Client non trouvé"));
         reservation.setClient(client);
-
-
         Voiture voiture = voitureRepository.findById(reservationDto.getVoitureId()).orElseThrow(() -> new EntityNotFoundException("Voiture non trouvé"));
         reservation.setVoiture(voiture);
         Reservation saveReservation = reservationRepository.save(reservation);
