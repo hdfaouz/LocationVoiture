@@ -2,6 +2,7 @@ package com.enaa.locatiovoitures.Controllers;
 
 import com.enaa.locatiovoitures.Dto.ReservationDto;
 import com.enaa.locatiovoitures.Services.ReservationService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-
+    @PreAuthorize("hasRole('CLIENT')")
     @PostMapping
     public ReservationDto ajouter(@RequestBody ReservationDto reservationDto){
         return reservationService.ajouter(reservationDto);
