@@ -168,4 +168,19 @@ public class ReservationTest {
         verify(reservationRepository, times(1)).findAll();
         verify(reservationMap, times(1)).toDTOs(reservations);
     }
+    @Test
+    void testDeleteReservation() {
+        // Given
+        Long reservationId = 1L;
+
+        // When
+        reservationService.deletReservation(reservationId);
+
+        // Then
+        // Vérifier que la méthode deleteById a été appelée exactement une fois avec le bon ID
+        verify(reservationRepository, times(1)).deleteById(reservationId);
+
+        // Vérifier qu'aucune autre interaction n'a eu lieu
+        verifyNoMoreInteractions(reservationRepository);
+    }
 }
