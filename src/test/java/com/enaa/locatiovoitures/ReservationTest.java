@@ -108,7 +108,6 @@ public class ReservationTest {
     }
     @Test
     void testGetAll() {
-        // Given
         Client client1 = new Client();
         client1.setId(1L);
 
@@ -153,14 +152,11 @@ public class ReservationTest {
 
         List<ReservationDto> expectedDtos = Arrays.asList(reservationDto1, reservationDto2);
 
-        // Mocking
         when(reservationRepository.findAll()).thenReturn(reservations);
         when(reservationMap.toDTOs(reservations)).thenReturn(expectedDtos);
 
-        // When
         List<ReservationDto> result = reservationService.getAll();
 
-        // Then
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals(expectedDtos, result);
@@ -169,7 +165,6 @@ public class ReservationTest {
         assertEquals(1L, result.get(0).getVoitureId());
         assertEquals(2L, result.get(1).getVoitureId());
 
-        // Verify interactions
         verify(reservationRepository, times(1)).findAll();
         verify(reservationMap, times(1)).toDTOs(reservations);
     }
