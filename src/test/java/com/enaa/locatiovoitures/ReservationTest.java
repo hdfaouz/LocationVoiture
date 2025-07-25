@@ -20,6 +20,10 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -101,5 +105,72 @@ public class ReservationTest {
             assertEquals(client, reservation.getClient());
             assertEquals(voiture, reservation.getVoiture());
         }
+    }
+    @Test
+    void testGetAll() {
+        // Given
+        Client client1 = new Client();
+        client1.setId(1L);
+
+        Client client2 = new Client();
+        client2.setId(2L);
+
+        Voiture voiture1 = new Voiture();
+        voiture1.setId(1L);
+        voiture1.setCategory("Toyota");
+
+        Voiture voiture2 = new Voiture();
+        voiture2.setId(2L);
+        voiture2.setCategory("Renault");
+
+        Reservation reservation1 = new Reservation();
+        reservation1.setId(1L);
+        reservation1.setClient(client1);
+        reservation1.setVoiture(voiture1);
+        reservation1.getStartDate(LocalDateTime.now());
+        reservation1.setEndDate(LocalDate.from(LocalDateTime.now().plusDays(3)));
+
+        Reservation reservation2 = new Reservation();
+        reservation2.setId(2L);
+        reservation2.setClient(client2);
+        reservation2.setVoiture(voiture2);
+        reservation2.setStartDate(LocalDate.from(LocalDateTime.now().plusDays(1)));
+        reservation2.setEndDate(LocalDate.from(LocalDateTime.now().plusDays(5)));
+
+        List<Reservation> reservations = Arrays.asList(reservation1, reservation2);
+
+        ReservationDto reservationDto1 = new ReservationDto();
+        reservationDto1.setClientId(1L);
+        reservationDto1.setVoitureId(1L);
+        reservationDto1.setStartDate(reservation1.getStartDate(LocalDateTime.now()));
+        reservationDto1.setEndDate(reservation1.getEndDate());
+
+        ReservationDto reservationDto2 = new ReservationDto();
+        reservationDto2.setClientId(2L);
+        reservationDto2.setVoitureId(2L);
+        reservationDto2.setStartDate(reservation2.getStartDate(LocalDateTime.now()));
+        reservationDto2.setEndDate(reservation2.getEndDate());
+
+        List<ReservationDto> expectedDtos = Arrays.asList(reservationDto1, reservationDto2);
+
+        // Mocking
+        when(reservationRepository.findAll()).thenReturn(reservations);
+        when(reservationMap.toDTOs(reservations)).thenReturn(expectedDtos);
+
+        // When
+        List<ReservationDto> result = reservationService.getAll();
+
+        // Then
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(expectedDtos, result);
+        assertEquals(1L, result.get(0).getClientId());
+        assertEquals(2L, result.get(1).getClientId());
+        assertEquals(1L, result.get(0).getVoitureId());
+        assertEquals(2L, result.get(1).getVoitureId());
+
+        // Verify interactions
+        verify(reservationRepository, times(1)).findAll();
+        verify(reservationMap, times(1)).toDTOs(reservations);
     }
 }
