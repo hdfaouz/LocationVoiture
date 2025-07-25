@@ -25,13 +25,15 @@ public class ReservationController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<ReservationDto> getAll(){
+
         return reservationService.getAll();
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
     @DeleteMapping("/{id}")
     public void delet(@PathVariable Long id){
-       reservationService.deletReservation(id);
+
+        reservationService.deletReservation(id);
     }
 
     @PutMapping("/{id}")
