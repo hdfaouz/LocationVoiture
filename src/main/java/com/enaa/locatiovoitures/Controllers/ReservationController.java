@@ -35,7 +35,7 @@ public class ReservationController {
 
         reservationService.deletReservation(id);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN','Client')")
     @PutMapping("/{id}")
     public ReservationDto update(@PathVariable Long id, @RequestBody ReservationDto reservationDto){
         return reservationService.update(id,reservationDto);
