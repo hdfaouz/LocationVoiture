@@ -1,67 +1,87 @@
 <div class="login-container">
-  <div class="login-card">
-    <h2 class="login-title">Car Rental Login</h2>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSumbit()" class="login-form">
-      <!-- Email Field -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          placeholder="Enter your email"
-          [ngClass]="{'is-invalid': email?.invalid && (email?.dirty || email?.touched)}"
-        >
-        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message">
-          <div *ngIf="email?.errors?.['required']">Email is required</div>
-          <div *ngIf="email?.errors?.['email']">Please enter a valid email</div>
-        </div>
-      </div>
-
-      <!-- Password Field -->
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          formControlName="password"
-          placeholder="Enter your password"
-          [ngClass]="{'is-invalid': password?.invalid && (password?.dirty || password?.touched)}"
-        >
-        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-message">
-          <div *ngIf="password?.errors?.['required']">Password is required</div>
-        </div>
-      </div>
-
-      <!-- Error Message -->
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-
-      <!-- Success Message -->
-      <div *ngIf="successMessage" class="alert alert-success">
-        {{ successMessage }}
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="login-button" [disabled]="loading || !loginForm.valid">
-        <span *ngIf="!loading">Login</span>
-        <span *ngIf="loading">Logging in...</span>
-      </button>
-
-      <!-- Additional Links -->
-      <div class="additional-links">
-        <a routerLink="/forgot-password" class="link">Forgot Password?</a>
-        <span class="divider">|</span>
-        <a routerLink="/register" class="link">Create an Account</a>
-      </div>
-    </form>
+  <!-- Background avec effet voiture -->
+  <div class="login-background">
+    <div class="car-silhouette"></div>
   </div>
 
-  <div class="branding">
-    <img src="assets/images/car-rental-logo.png" alt="Car Rental Logo" class="logo">
-    <h3>Rent Your Dream Car Today</h3>
-    <p>Easy, fast and reliable car rental service</p>
+  <!-- Carte de connexion -->
+  <div class="login-card">
+    <!-- En-tête -->
+    <div class="login-header">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="#FFD700">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"/>
+            <circle cx="7.5" cy="14.5" r="1.5"/>
+            <circle cx="16.5" cy="14.5" r="1.5"/>
+          </svg>
+        </div>
+        <h1 class="brand-name">CarRental</h1>
+      </div>
+      <p class="welcome-text">Conduisez votre aventure</p>
+    </div>
+
+    <!-- Formulaire -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSumbit()" class="auth-form">
+      <!-- Champ Email -->
+      <div class="input-field">
+        <label>Email</label>
+        <div class="input-container">
+          <svg class="input-icon" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="votre@email.com"
+          >
+        </div>
+      </div>
+
+      <!-- Champ Mot de passe -->
+      <div class="input-field">
+        <label>Mot de passe</label>
+        <div class="input-container">
+          <svg class="input-icon" viewBox="0 0 24 24">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+          >
+        </div>
+      </div>
+
+      <!-- Options -->
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox">
+          <span>Se souvenir de moi</span>
+        </label>
+        <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+      </div>
+
+      <!-- Bouton de connexion -->
+      <button type="submit" class="submit-btn">
+        <span>Se connecter</span>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <!-- Séparateur -->
+      <div class="separator">
+        <div class="line"></div>
+        <span>ou</span>
+        <div class="line"></div>
+      </div>
+
+      <!-- Inscription -->
+      <div class="signup-prompt">
+        <span>Nouveau chez CarRental ?</span>
+        <a routerLink="/register" class="signup-link">Créer un compte</a>
+      </div>
+    </form>
   </div>
 </div>

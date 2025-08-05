@@ -1,174 +1,268 @@
-/* Main container */
+/* Variables de couleur */
+:root {
+  --black: #000000;
+  --gold: #FFD700;
+  --dark-gold: #FFC000;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #495057;
+  --error: #e74c3c;
+  --success: #2ecc71;
+}
+
+/* Base */
 .login-container {
   display: flex;
-  min-height: 100vh;
-  background-color: #f5f5f5;
-}
-
-/* Login card */
-.login-card {
-  flex: 1;
-  max-width: 500px;
-  padding: 2rem;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--light-gray);
+  position: relative;
+  overflow: hidden;
 }
 
-.login-title {
+.login-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.1) 100%);
+}
+
+.car-silhouette {
+  position: absolute;
+  bottom: -50px;
+  right: -100px;
+  width: 600px;
+  height: 300px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50" fill="%23000000" opacity="0.05"><path d="M85 25l-5-10H20l-5 10H5v15h5l5 10h50l5-10h5V25h-5zM20 20h50l3 6H17l3-6zM15 35H8v-5h7v5zm67 0h-7v-5h7v5zM25 40l-3-6h46l-3 6H25z"/></svg>');
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0;
+}
+
+/* Carte de connexion */
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--medium-gray);
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+}
+
+/* En-tête */
+.login-header {
   text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-size: 2rem;
+  margin-bottom: 32px;
 }
 
-/* Form styles */
-.login-form {
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.welcome-text {
+  color: var(--dark-gray);
+  font-size: 16px;
+  margin: 8px 0 0;
+  font-weight: 400;
+}
+
+/* Formulaire */
+.auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 24px;
 }
 
-.form-group {
+.input-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
-.form-group label {
-  font-weight: 600;
-  color: #555;
+.input-field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-gray);
 }
 
-.form-group input {
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.form-group input:focus {
+.input-icon {
+  position: absolute;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  color: var(--dark-gray);
+}
+
+.input-field input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: var(--light-gray);
+}
+
+.input-field input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  background-color: white;
 }
 
-.is-invalid {
-  border-color: #dc3545 !important;
+/* Options */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
 }
 
-.error-message {
-  color: #dc3545;
-  font-size: 0.875rem;
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
-/* Button styles */
-.login-button {
-  padding: 0.8rem;
-  background-color: #007bff;
+.remember-me input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.forgot-password {
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+  color: var(--dark-gold);
+}
+
+/* Bouton */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--black);
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.login-button:hover:not(:disabled) {
-  background-color: #0069d9;
-}
-
-.login-button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-/* Additional links */
-.additional-links {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  font-size: 0.875rem;
+  gap: 8px;
+  transition: all 0.3s ease;
 }
 
-.link {
-  color: #007bff;
+.submit-btn:hover {
+  background-color: var(--gold);
+  color: var(--black);
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Séparateur */
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--dark-gray);
+  font-size: 14px;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--medium-gray);
+}
+
+/* Inscription */
+.signup-prompt {
+  text-align: center;
+  font-size: 14px;
+  color: var(--dark-gray);
+}
+
+.signup-link {
+  color: var(--black);
+  font-weight: 600;
   text-decoration: none;
+  margin-left: 8px;
 }
 
-.link:hover {
+.signup-link:hover {
+  color: var(--gold);
   text-decoration: underline;
 }
 
-.divider {
-  color: #6c757d;
-}
-
-/* Alert messages */
-.alert {
-  padding: 0.75rem 1.25rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-}
-
-.alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-}
-
-/* Branding section */
-.branding {
-  flex: 1;
-  background: linear-gradient(135deg, #007bff, #00a8ff);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  text-align: center;
-}
-
-.branding h3 {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-}
-
-.branding p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-
-.logo {
-  max-width: 150px;
-  margin-bottom: 2rem;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .login-container {
-    flex-direction: column;
-  }
-
+/* Responsive */
+@media (max-width: 600px) {
   .login-card {
-    max-width: 100%;
-    padding: 1.5rem;
+    padding: 32px 24px;
+    margin: 16px;
   }
 
-  .branding {
-    padding: 1.5rem;
-    display: none; /* Hide branding on mobile if space is limited */
+  .car-silhouette {
+    display: none;
   }
 }
