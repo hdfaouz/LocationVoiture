@@ -28,7 +28,7 @@ export interface User {
 })
 export class AuthService {
 
-  private apiUrl = "http://localhost:8080/api/v1/auth/register";
+  private apiUrl = "http://localhost:8080";
 
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
@@ -47,11 +47,11 @@ export class AuthService {
   }
 
   login(credentials:{email:string, password:string }):Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${this.apiUrl}/api/auth/authenticate`,credentials)
+    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`,credentials)
   }
 
   register(userdata : {name:string,email:string,password:string,role:string}):Observable<any>{
-    return this.http.post<RegisterRequest>(`${this.apiUrl}/api/auth/register`,userdata);
+    return this.http.post<RegisterRequest>(`${this.apiUrl}/api/v1/auth/register`,userdata);
   }
   saveUserData(response: LoginResponse): void {
     localStorage.setItem('token', response.token);
