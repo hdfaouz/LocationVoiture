@@ -42,8 +42,10 @@ export class AuthService {
   }
 
   private getUserFromStorage(): User | null {
+    if (typeof  Storage !=='undefined' && localStorage){
     const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;
+    return userData ? JSON.parse(userData) : null;}
+    return null;
   }
 
   login(credentials:{email:string, password:string }):Observable<LoginResponse>{

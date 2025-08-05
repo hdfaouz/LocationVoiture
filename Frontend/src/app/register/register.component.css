@@ -14,7 +14,6 @@
 .signup-background {
   position: absolute;
   inset: 0;
-  background: url('../assets/city-built-interior-reflection-sign.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.1;
