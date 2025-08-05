@@ -1,6 +1,5 @@
 package com.enaa.locatiovoitures.Model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
