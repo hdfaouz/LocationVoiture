@@ -11,15 +11,13 @@ export interface RegisterRequest {
 
 export interface LoginResponse {
   token: string;
-
   user: User;
 }
 
-export interface User {
-  id: number;
-  name: string;
-  role: string;
+export interface User{
   email: string;
+  //password: string;  // facultatif : mais attention, ce n’est **jamais** recommandé de renvoyer le mot de passe au frontend
+  role: string;
 }
 
 

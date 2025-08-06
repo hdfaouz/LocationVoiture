@@ -111,8 +111,8 @@
             [class.error]="registerForm.get('role')?.invalid && registerForm.get('role')?.touched"
           >
             <option value="" disabled>Select your account type</option>
-            <option value="CUSTOMER">Customer - Find & Book Parking</option>
-            <option value="ADMIN">Admin - Manage Parking Facilities</option>
+            <option value="CLIENT">Client - Find & Book Car</option>
+            <option value="ADMIN">Admin - Manage Car Facilities</option>
           </select>
         </div>
         <div class="error-message" *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched">

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router, RouterModule} from "@angular/router";
+import {Router, RouterLink, RouterModule} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,RouterModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterModule , RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -67,8 +67,8 @@ export class LoginComponent implements OnInit{
               this.router.navigate(['/admin-dashboard']);
               break;
 
-            case 'CUSTOMER':
-              this.router.navigate(['/customer-Dash']);
+            case 'CLIENT':
+              this.router.navigate(['/register']);
               break;
             default:
               this.router.navigate(['/']);

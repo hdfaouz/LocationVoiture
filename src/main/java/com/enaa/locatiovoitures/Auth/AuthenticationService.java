@@ -1,6 +1,7 @@
 package com.enaa.locatiovoitures.Auth;
 
 import com.enaa.locatiovoitures.Configuration.JwtService;
+import com.enaa.locatiovoitures.Dto.UserDto;
 import com.enaa.locatiovoitures.Model.Admin;
 import com.enaa.locatiovoitures.Model.Client;
 import com.enaa.locatiovoitures.Model.User;
@@ -61,8 +62,17 @@ public class AuthenticationService {
         User user = userRepository.findByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(user);
 
-        AuthenticationResponse response = new AuthenticationResponse();
-        response.setToken(jwtToken);
-        return response;
+        UserDto userDto = new UserDto(
+                user.getEmail(),
+                user.getPassword(),
+                user.getRole()
+
+        );
+
+        return  new AuthenticationResponse(jwtToken , userDto);
+
+//        AuthenticationResponse response = new AuthenticationResponse();
+//        response.setToken(jwtToken);
+//        return response;
     }
 }

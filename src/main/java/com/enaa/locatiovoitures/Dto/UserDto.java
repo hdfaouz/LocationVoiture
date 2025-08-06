@@ -16,6 +16,9 @@ public class UserDto {
         this.role = role;
     }
 
+    public UserDto(String email, String password, Role role, Object o) {
+    }
+
     public String getEmail() {
         return email;
     }
