@@ -1,6 +1,7 @@
 package com.enaa.locatiovoitures.Services;
 
 import com.enaa.locatiovoitures.Dto.ReservationDto;
+import com.enaa.locatiovoitures.Dto.VoitureDto;
 import com.enaa.locatiovoitures.Mappers.ReservationMap;
 import com.enaa.locatiovoitures.Model.Client;
 import com.enaa.locatiovoitures.Model.Reservation;
@@ -49,6 +50,7 @@ public class ReservationService {
     }
 
     public void deletReservation(Long id){
+
         reservationRepository.deleteById(id);
     }
     public ReservationDto update(Long id, ReservationDto dto){
@@ -63,5 +65,11 @@ public class ReservationService {
        Reservation savedReservation = reservationRepository.save(reservation);
 
         return reservationMap.toDto(savedReservation);
+    }
+
+    public ReservationDto getById(Long id){
+        Reservation foundCompetence =reservationRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("book not found"));
+        return reservationMap.toDto(foundCompetence);
     }
 }

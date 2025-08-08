@@ -40,4 +40,9 @@ public class ReservationController {
     public ReservationDto update(@PathVariable Long id, @RequestBody ReservationDto reservationDto){
         return reservationService.update(id,reservationDto);
     }
+
+    @GetMapping("{id}")
+    public ReservationDto getById(@PathVariable Long id){
+        return reservationService.getById(id);
+    }
 }
