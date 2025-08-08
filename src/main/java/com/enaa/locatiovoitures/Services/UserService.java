@@ -32,6 +32,7 @@ public class UserService {
     }
 
     public void delet(Long id){
+
         userRepository.deleteById(id);
     }
 
@@ -47,5 +48,11 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         return userMap.toDto(savedUser);
+    }
+
+    public UserDto getById(Long id){
+        User foundCompetence =userRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("book not found"));
+        return userMap.toDto(foundCompetence);
     }
 }

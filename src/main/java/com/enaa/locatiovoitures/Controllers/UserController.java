@@ -22,14 +22,21 @@ public class UserController {
     }
     @GetMapping
     public List<UserDto> getAll(){
+
         return userService.getAll();
     }
     @DeleteMapping("/{id}")
     public void delet(@PathVariable Long id){
+
         userService.delet(id);
     }
     @PutMapping("/{id}")
     public UserDto update(@PathVariable Long id,@RequestBody UserDto userDto){
         return userService.update(id, userDto);
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getById(@PathVariable Long id){
+        return userService.getById(id);
     }
 }
