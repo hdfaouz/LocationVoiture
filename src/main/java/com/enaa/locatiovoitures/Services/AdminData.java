@@ -1,5 +1,6 @@
 package com.enaa.locatiovoitures.Services;
 
+import com.enaa.locatiovoitures.Model.Admin;
 import com.enaa.locatiovoitures.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,13 +9,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class AdminData implements CommandLineRunner {
-    @Override
-    public void run(String... args) throws Exception {
-
-    }
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Override
+    public void run(String... args) throws Exception {
+
+        String adminEmail = "admin@enaaskills.com";
+
+        if (!userRepository.existsByEmail(adminEmail)) {
+
+            Admin admin = new Admin();
+
+            admin.setEmail(adminEmail);
+            admin.setPassword(passwordEncoder.encode("Admin123!"));
+
+
+            userRepository.save(admin);
+            System.out.println("Admin créé automatiquement.");
+        } else {
+            System.out.println("Admin déjà présent en base.");
+        }
+    }
+
 }
