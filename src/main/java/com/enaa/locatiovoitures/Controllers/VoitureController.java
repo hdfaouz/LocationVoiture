@@ -35,4 +35,9 @@ public class VoitureController {
     public VoitureDto update(@PathVariable Long id, @RequestBody VoitureDto dto){
        return voitureService.update(id, dto);
     }
+
+    @GetMapping("/{id}")
+    public VoitureDto getById(@PathVariable Long id){
+        return voitureService.getById(id);
+    }
 }
