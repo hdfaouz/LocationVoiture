@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit{
 
           switch(response.user.role) {
             case 'ADMIN':
-              this.router.navigate(['/admin-dashboard']);
+              this.router.navigate(['/register']);
               break;
 
             case 'CLIENT':
