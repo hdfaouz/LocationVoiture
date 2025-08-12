@@ -82,6 +82,10 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   saveRole(role: string): void {
     localStorage.setItem('role', role);
   }
