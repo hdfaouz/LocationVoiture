@@ -23,6 +23,7 @@ public class User  implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
 
     public Long getId() {
