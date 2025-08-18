@@ -16,10 +16,9 @@ export interface LoginResponse {
 
 export interface User{
   email: string;
-  //password: string;  // facultatif : mais attention, ce n’est **jamais** recommandé de renvoyer le mot de passe au frontend
+  //password: string;  // facultatif : mais attention, ce n'est **jamais** recommandé de renvoyer le mot de passe au frontend
   role: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +27,10 @@ export class AuthService {
 
   private apiUrl = "http://localhost:8080";
 
-
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient) {
     const user = this.getUserFromStorage();
     if (user) {
       this.currentUserSubject.next(user);
@@ -40,27 +38,54 @@ export class AuthService {
   }
 
   private getUserFromStorage(): User | null {
-    if (typeof  Storage !=='undefined' && localStorage){
-    const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;}
+    if (typeof Storage !== 'undefined' && localStorage) {
+      const userData = localStorage.getItem('user');
+
+      // Check if userData exists, is not null, and is not the string 'undefined'
+      if (userData && userData !== 'undefined' && userData !== 'null') {
+        try {
+          const parsedUser = JSON.parse(userData);
+          // Validate that the parsed data has the expected structure
+          if (parsedUser && typeof parsedUser === 'object' && parsedUser.email && parsedUser.role) {
+            return parsedUser;
+          } else {
+            console.warn('Invalid user data structure in localStorage');
+            localStorage.removeItem('user');
+            return null;
+          }
+        } catch (error) {
+          console.error('Error parsing user data from localStorage:', error);
+          // Clear corrupted data
+          localStorage.removeItem('user');
+          return null;
+        }
+      }
+    }
     return null;
   }
 
-  login(credentials:{email:string, password:string }):Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`,credentials)
+  login(credentials: {email: string, password: string}): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`, credentials);
   }
 
-  register(userdata : {name:string,email:string,password:string,role:string}):Observable<any>{
-    return this.http.post<RegisterRequest>(`${this.apiUrl}/api/v1/auth/register`,userdata);
+  register(userdata: {name: string, email: string, password: string, role: string}): Observable<any> {
+    return this.http.post<RegisterRequest>(`${this.apiUrl}/api/v1/auth/register`, userdata);
   }
+
   saveUserData(response: LoginResponse): void {
-    localStorage.setItem('token', response.token);
-    localStorage.setItem('user', JSON.stringify(response.user));
-    this.currentUserSubject.next(response.user);
+    if (response?.token && response?.user) {
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      this.currentUserSubject.next(response.user);
+    } else {
+      console.error('Invalid response data for saving user');
+    }
   }
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('role');
     this.currentUserSubject.next(null);
   }
 
@@ -77,16 +102,20 @@ export class AuthService {
     return user ? user.role : null;
   }
 
-
   saveToken(token: string): void {
-    localStorage.setItem('token', token);
+    if (token && token !== 'undefined') {
+      localStorage.setItem('token', token);
+    }
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    return (token && token !== 'undefined' && token !== 'null') ? token : null;
   }
 
   saveRole(role: string): void {
-    localStorage.setItem('role', role);
+    if (role && role !== 'undefined') {
+      localStorage.setItem('role', role);
+    }
   }
 }

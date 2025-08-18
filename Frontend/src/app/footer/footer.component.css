@@ -1,0 +1,61 @@
+.footer-section {
+  background-color: #ffc107; /* Couleur de fond jaune */
+  color: #333; /* Couleur du texte par défaut */
+  font-family: Arial, sans-serif;
+}
+
+.footer-title {
+  font-weight: bold;
+  color: #333; /* Couleur des titres de colonne */
+  font-size: 1.25rem;
+}
+
+.footer-links {
+  padding-left: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #333; /* Couleur des liens */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #000; /* Couleur des liens au survol */
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.footer-copyright {
+  font-weight: bold;
+  color: #333; /* Couleur du texte de copyright */
+  font-size: 1.1rem;
+}
+
+.social-icons .social-icon {
+  color: #333; /* Couleur des icônes de réseaux sociaux */
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons .social-icon:hover {
+  color: #000; /* Couleur des icônes au survol */
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .footer-section .text-md-start {
+    text-align: center !important;
+  }
+  .social-icons {
+    text-align: center !important;
+    margin-top: 1rem;
+  }
+}
+
