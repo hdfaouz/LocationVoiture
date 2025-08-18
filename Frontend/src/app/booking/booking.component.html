@@ -1,0 +1,60 @@
+<div class="payment-container">
+  <div class="payment-header">
+    <i class="fas fa-arrow-left back-arrow"></i>
+    <h2>Paiement</h2>
+  </div>
+  <h4 class="mb-4">Entrer les détails de la carte</h4>
+
+  <form>
+    <!-- Card Holder -->
+    <div class="form-group">
+      <label for="card-holder" class="form-label">Titulaire de la carte</label>
+      <input type="text" class="form-control" id="card-holder" placeholder="Adrian Rangel">
+    </div>
+
+    <!-- Card Number -->
+    <div class="form-group">
+      <label for="card-number" class="form-label">Numéro de carte</label>
+      <input type="text" class="form-control" id="card-number" placeholder="XXXX XXXX XXXX XXXX">
+    </div>
+
+    <!-- Expiry Date & CVV -->
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label for="expiry-date" class="form-label">Date d'expiration</label>
+        <input type="text" class="form-control" id="expiry-date" placeholder="MM/YY">
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="cvv" class="form-label">CVV</label>
+        <input type="text" class="form-control" id="cvv" placeholder="XXX">
+      </div>
+    </div>
+
+    <h5 class="mt-4 mb-3">Autre méthode de paiement</h5>
+    <div class="card-icons-container">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/PayPal_logo_color_2015.svg" alt="PayPal">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg" alt="Apple Pay">
+    </div>
+
+    <!-- Checkboxes -->
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="checkbox" id="terms">
+      <label class="form-check-label" for="terms">
+        J'accepte les <a href="#">conditions générales</a>
+      </label>
+    </div>
+    <div class="form-check mb-4">
+      <input class="form-check-input" type="checkbox" id="save-card">
+      <label class="form-check-label" for="save-card">
+        sauvegarder les détails de la carte pour la prochaine fois
+      </label>
+    </div>
+
+    <!-- Submit button -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-confirm">Confirmer le paiement</button>
+    </div>
+  </form>
+</div>
