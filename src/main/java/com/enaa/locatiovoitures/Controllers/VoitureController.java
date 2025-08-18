@@ -2,6 +2,7 @@ package com.enaa.locatiovoitures.Controllers;
 
 import com.enaa.locatiovoitures.Dto.VoitureDto;
 import com.enaa.locatiovoitures.Services.VoitureService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +15,10 @@ public class VoitureController {
     private final VoitureService voitureService;
 
     public VoitureController(VoitureService voitureService) {
-
         this.voitureService = voitureService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public VoitureDto ajouterVoiture(@RequestBody VoitureDto voitureDto){
         return voitureService.ajouterVoiture(voitureDto);
@@ -28,11 +29,13 @@ public class VoitureController {
         return voitureService.getAllVoitures();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deletVoiture( @PathVariable Long id){
         voitureService.deletVoiture(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public VoitureDto update(@PathVariable Long id, @RequestBody VoitureDto dto){
        return voitureService.update(id, dto);
@@ -40,7 +43,6 @@ public class VoitureController {
 
     @GetMapping("/{id}")
     public VoitureDto getById(@PathVariable Long id){
-
         return voitureService.getById(id);
     }
 }
