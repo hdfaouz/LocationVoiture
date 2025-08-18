@@ -14,6 +14,7 @@ public class VoitureController {
     private final VoitureService voitureService;
 
     public VoitureController(VoitureService voitureService) {
+
         this.voitureService = voitureService;
     }
 
@@ -39,6 +40,7 @@ public class VoitureController {
 
     @GetMapping("/{id}")
     public VoitureDto getById(@PathVariable Long id){
+
         return voitureService.getById(id);
     }
 }

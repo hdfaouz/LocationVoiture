@@ -43,7 +43,7 @@ public class VoitureService {
        Voiture voiture = voitureRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Voiture not found"));
 
-        voiture.isAvailable(dto.isAvailable());
+        voiture.setAvailable(dto.isAvailable());
         voiture.setCategory(dto.getCategory());
         voiture.setBrand(dto.getBrand());
         voiture.setModel(dto.getModel());
