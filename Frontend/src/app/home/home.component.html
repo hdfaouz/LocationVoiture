@@ -65,7 +65,8 @@
       <div class="col-lg-6 position-relative mb-4 mb-lg-0">
         <div class="circle-shapes">
         </div>
-        <img src="assets/luxury-car-speeds-by-modern-building-dusk-generative-ai.jpg" class="img-fluid car-service-image" alt="Mercedes Cabriolet">
+        <img ngSrc="assets/luxury-car-speeds-by-modern-building-dusk-generative-ai.jpg" class="img-fluid car-service-image" alt="Mercedes Cabriolet"
+             height="3200" width="4800">
       </div>
       <div class="col-lg-6 text-center text-lg-start">
         <h2 class="services-title">Our Services</h2>
@@ -113,7 +114,7 @@
             </div>
             <div class="d-grid gap-2">
               <button class="btn custom-btn btn-reserve">Réserver</button>
-              <button class="btn custom-btn btn-details">Voir Détails</button>
+              <button  routerLink="/detail" class="btn custom-btn btn-details">Voir Détails</button>
             </div>
           </div>
         </div>
@@ -131,7 +132,7 @@
             </div>
             <div class="d-grid gap-2">
               <button class="btn custom-btn btn-reserve">Réserver</button>
-              <button class="btn custom-btn btn-details">Voir Détails</button>
+              <button routerLink="/detail"  class="btn custom-btn btn-details">Voir Détails</button>
             </div>
           </div>
         </div>
@@ -149,7 +150,7 @@
             </div>
             <div class="d-grid gap-2">
               <button class="btn custom-btn btn-reserve">Réserver</button>
-              <button class="btn custom-btn btn-details">Voir Détails</button>
+              <button  routerLink="/detail" class="btn custom-btn btn-details">Voir Détails</button>
             </div>
           </div>
         </div>
@@ -167,7 +168,7 @@
             </div>
             <div class="d-grid gap-2">
               <button class="btn custom-btn btn-reserve">Réserver</button>
-              <button class="btn custom-btn btn-details">Voir Détails</button>
+              <button  routerLink="/detail"  class="btn custom-btn btn-details">Voir Détails</button>
             </div>
           </div>
         </div>
@@ -177,25 +178,46 @@
   </div>
 </section>
 
+
 <section class="py-5 bg-black text-white text-center">
   <div class="container">
     <h2 class="mb-4 display-6 fw-bold">Our Luxury Brand</h2>
     <div class="d-flex justify-content-center flex-wrap gap-3 mb-4">
-      <button class="btn custom-brand-btn active">
-        <img src="URL_LOGO_AUDI" alt="Audi Logo" class="me-2 brand-logo"> Audi
-      </button>
-      <button class="btn custom-brand-btn">
-        <img src="URL_LOGO_MERCEDES" alt="Mercedes Logo" class="me-2 brand-logo"> Mercedes
-      </button>
-      <button class="btn custom-brand-btn">
-        <img src="URL_LOGO_LAND_ROVER" alt="Land Rover Logo" class="me-2 brand-logo"> Land Rover
-      </button>
-      <button class="btn custom-brand-btn">
-        <img src="URL_LOGO_FERRARI" alt="Ferrari Logo" class="me-2 brand-logo"> Ferrari
-      </button>
-      <button class="btn custom-brand-btn">
-        <img src="URL_LOGO_TESLA" alt="Tesla Logo" class="me-2 brand-logo"> Tesla
-      </button>
+      <!-- Bouton Audi -->
+      <div class="d-flex flex-column align-items-center">
+        <button class="btn custom-brand-btn active">
+          <img ngSrc="assets/LOGO_AUDI.jpg" alt="Audi Logo" class="brand-logo">
+        </button>
+        <small class="mt-2 text-white">Audi</small>
+      </div>
+      <!-- Bouton Mercedes -->
+      <div class="d-flex flex-column align-items-center">
+        <button class="btn custom-brand-btn">
+          <img ngSrc="assets/LOGO_MERCEDES.jpg" alt="Mercedes Logo" class="brand-logo">
+        </button>
+        <small class="mt-2 text-white">Mercedes</small>
+      </div>
+      <!-- Bouton Land Rover -->
+      <div class="d-flex flex-column align-items-center">
+        <button class="btn custom-brand-btn">
+          <img ngSrc="assets/LOGO_AUDI.jpg" alt="Land Rover Logo" class="brand-logo">
+        </button>
+        <small class="mt-2 text-white">Land Rover</small>
+      </div>
+      <!-- Bouton Ferrari -->
+      <div class="d-flex flex-column align-items-center">
+        <button class="btn custom-brand-btn">
+          <img src="assets/Ferrari.jpg" alt="Ferrari Logo" class="brand-logo">
+        </button>
+        <small class="mt-2 text-white">Ferrari</small>
+      </div>
+      <!-- Bouton Tesla -->
+      <div class="d-flex flex-column align-items-center">
+        <button class="btn custom-brand-btn">
+          <img src="assets/LOGO_TESLA.jpg" alt="Tesla Logo" class="brand-logo">
+        </button>
+        <small class="mt-2 text-white">Tesla</small>
+      </div>
     </div>
     <a href="#" class="text-warning text-decoration-none fw-bold">See The Store</a>
   </div>

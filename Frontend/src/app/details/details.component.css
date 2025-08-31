@@ -1,0 +1,86 @@
+body {
+  background-color: #f7f7f7;
+  font-family: 'Inter', sans-serif;
+}
+.container {
+  max-width: 600px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+.header .icon-btn {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.car-image-container {
+  position: relative;
+}
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+.carousel-control-prev, .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.carousel-indicators button {
+  background-color: #888;
+}
+.content {
+  padding: 20px;
+}
+.section-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f7f7f7;
+  border-radius: 15px;
+}
+.spec-item i {
+  font-size: 1.5rem;
+  color: #ff9100;
+}
+.price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.btn-reserve-now {
+  background-color: #ff9100;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding: 15px;
+  border-radius: 15px;
+}

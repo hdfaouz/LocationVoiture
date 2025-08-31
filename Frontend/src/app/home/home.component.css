@@ -119,6 +119,32 @@ body {
   background-color: #000;
 }
 
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+/* Styles pour les boutons et l'alignement */
+.custom-brand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 50%;
+  padding: 10px;
+  width: 60px;
+  height: 60px;
+  transition: all 0.3s ease;
+}
+.custom-brand-btn:hover,
+.custom-brand-btn.active {
+  background-color: #ff9100;
+  color: #fff;
+  border-color: #ff9100;
+}
+
 .circle-shapes {
   position: absolute;
   top: 50%;
