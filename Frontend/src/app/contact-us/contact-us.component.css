@@ -1,0 +1,9 @@
+.btn-ait-loutar {
+  background-color: #ff9900;
+  border-color: #ff9900;
+  color: white;
+}
+.btn-ait-loutar:hover {
+  background-color: #e68a00;
+  border-color: #e68a00;
+}
