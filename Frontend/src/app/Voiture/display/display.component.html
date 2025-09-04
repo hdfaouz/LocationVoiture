@@ -1,0 +1,37 @@
+```html
+<div class="container">
+  <h2>Liste des Voitures</h2>
+
+  <!-- Error message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="!cars.length && !errorMessage" class="loading">
+    Chargement des voitures...
+  </div>
+
+  <!-- Cars table -->
+  <table *ngIf="cars.length" class="cars-table">
+    <thead>
+    <tr>
+      <th>Marque</th>
+      <th>Modèle</th>
+      <th>Catégorie</th>
+      <th>Prix par jour</th>
+      <th>Disponible</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let car of cars">
+      <td>{{ car.brand }}</td>
+      <td>{{ car.model }}</td>
+      <td>{{ car.category }}</td>
+      <td>{{ car.pricePerDay | currency:'EUR' }}</td>
+      <td>{{ car.available ? 'Oui' : 'Non' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+```

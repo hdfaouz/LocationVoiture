@@ -1,20 +1,29 @@
-import {HttpHandlerFn, HttpRequest} from '@angular/common/http';
+import {HttpInterceptorFn} from '@angular/common/http';
 import {inject} from "@angular/core";
 import {AuthService} from "../services/auth.service";
 
-export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
 
-  if (req.url.includes('/auth') || !authService.getToken()) {
-    return next(req);
+  //if (req.url.includes('/auth') || !authService.getToken()) {
+  //  return next(req);
+  //}
+
+  //const authReq = req.clone({
+  //  setHeaders: {
+  //    Authorization: `Bearer ${authService.getToken()}`
+  //  }
+  //});
+  const token = localStorage.getItem('auth_token');
+  if (token) {
+    const cloned = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return next(cloned);
   }
 
-  const authReq = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${authService.getToken()}`
-    }
-  });
-
-  console.log('Added auth header to request:', authReq);
-  return next(authReq);
+  //console.log('Added auth header to request:', authReq);
+  return next(req);
 }

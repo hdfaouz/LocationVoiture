@@ -104,12 +104,12 @@ export class AuthService {
 
   saveToken(token: string): void {
     if (token && token !== 'undefined') {
-      localStorage.setItem('token', token);
+      localStorage.setItem('auth_token', token);
     }
   }
 
   getToken(): string | null {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('auth_token');
     return (token && token !== 'undefined' && token !== 'null') ? token : null;
   }
 

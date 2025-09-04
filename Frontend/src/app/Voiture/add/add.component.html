@@ -1,0 +1,129 @@
+<div class="form-container">
+  <h1 class="form-title">🚗 Ajouter une Voiture</h1>
+
+  <!-- Message de succès -->
+  <div *ngIf="submitSuccess" class="success-message">
+    Voiture ajoutée avec succès !
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+
+    <!-- Marque -->
+    <div class="form-group">
+      <label class="form-label" for="brand">Marque *</label>
+      <input
+        type="text"
+        id="brand"
+        formControlName="brand"
+        class="form-input"
+        placeholder="Ex: BMW, Mercedes, Audi, Toyota..."
+        [class.error]="hasError('brand', 'required')"
+      >
+      <div *ngIf="hasError('brand', 'required')" class="error-message">
+        La marque est obligatoire
+      </div>
+    </div>
+
+    <!-- Modèle -->
+    <div class="form-group">
+      <label class="form-label" for="model">Modèle *</label>
+      <input
+        type="text"
+        id="model"
+        formControlName="model"
+        class="form-input"
+        placeholder="Ex: Serie 3, Classe C, A4, Corolla..."
+        [class.error]="hasError('model', 'required')"
+      >
+      <div *ngIf="hasError('model', 'required')" class="error-message">
+        Le modèle est obligatoire
+      </div>
+    </div>
+
+    <!-- Catégorie -->
+    <div class="form-group">
+      <label class="form-label" for="category">Catégorie *</label>
+      <select
+        id="category"
+        formControlName="category"
+        class="form-select"
+        [class.error]="hasError('category', 'required')"
+      >
+        <option value="">Sélectionnez une catégorie</option>
+        <option *ngFor="let cat of categories" [value]="cat.value">
+          {{ cat.label }}
+        </option>
+      </select>
+      <div *ngIf="hasError('category', 'required')" class="error-message">
+        La catégorie est obligatoire
+      </div>
+    </div>
+
+    <!-- Prix -->
+    <div class="form-group">
+      <label class="form-label" for="pricePerDay">Prix par jour (€) *</label>
+      <input
+        type="number"
+        id="pricePerDay"
+        formControlName="pricePerDay"
+        class="form-input"
+        placeholder="Ex: 45"
+        min="0"
+        step="0.01"
+        [class.error]="hasError('pricePerDay', 'required') || hasError('pricePerDay', 'min')"
+      >
+      <div *ngIf="hasError('pricePerDay', 'required')" class="error-message">
+        Le prix est obligatoire
+      </div>
+      <div *ngIf="hasError('pricePerDay', 'min')" class="error-message">
+        Le prix doit être supérieur à 0
+      </div>
+    </div>
+
+    <!-- Disponibilité -->
+    <div class="form-group">
+      <div class="checkbox-group">
+        <input
+          type="checkbox"
+          id="available"
+          formControlName="available"
+          class="checkbox-input"
+        >
+        <label class="checkbox-label" for="available">Disponible à la location</label>
+      </div>
+    </div>
+
+    <!-- Image URL -->
+    <div class="form-group">
+      <label class="form-label" for="imageUrl">URL de l'image</label>
+      <input
+        type="url"
+        id="imageUrl"
+        formControlName="imageUrl"
+        class="form-input"
+        placeholder="https://exemple.com/voiture.jpg"
+      >
+      <div *ngIf="hasError('imageUrl', 'pattern')" class="error-message">
+        L'URL doit pointer vers une image valide (jpg, jpeg, png, gif, webp)
+      </div>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button
+      type="submit"
+      class="submit-btn"
+      [disabled]="isSubmitting || carForm.invalid"
+    >
+      <span *ngIf="!isSubmitting">Ajouter la voiture</span>
+      <div *ngIf="isSubmitting" class="loading">
+        <div class="spinner"></div>
+        <span>Ajout en cours...</span>
+      </div>
+    </button>
+  </form>
+</div>
