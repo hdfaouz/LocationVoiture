@@ -1,7 +1,7 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e2e8f0 0%, #e2e8f0 100%);
   padding: 20px;
   position: relative;
 }
@@ -311,7 +311,7 @@
 .submit-btn {
   width: 100%;
   padding: 22px 32px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #e68a00, #e53e3e);
   color: white;
   border: none;
   border-radius: 16px;

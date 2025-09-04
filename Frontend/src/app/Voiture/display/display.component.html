@@ -1,4 +1,3 @@
-```html
 <div class="container">
   <h2>Liste des Voitures</h2>
 
@@ -12,26 +11,39 @@
     Chargement des voitures...
   </div>
 
-  <!-- Cars table -->
-  <table *ngIf="cars.length" class="cars-table">
-    <thead>
-    <tr>
-      <th>Marque</th>
-      <th>Modèle</th>
-      <th>Catégorie</th>
-      <th>Prix par jour</th>
-      <th>Disponible</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let car of cars">
-      <td>{{ car.brand }}</td>
-      <td>{{ car.model }}</td>
-      <td>{{ car.category }}</td>
-      <td>{{ car.pricePerDay | currency:'EUR' }}</td>
-      <td>{{ car.available ? 'Oui' : 'Non' }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <!-- Cars cards -->
+  <div *ngIf="cars.length" class="cars-grid">
+    <div *ngFor="let car of cars" class="car-card">
+
+      <!-- Image de la voiture -->
+      <div class="car-image">
+        <img
+          *ngIf="car.imageUrl"
+          [src]="car.imageUrl"
+          [alt]="car.brand + ' ' + car.model"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+        >
+        <div class="no-image" style="display: none;">
+          <span>Image non disponible</span>
+        </div>
+        <div *ngIf="!car.imageUrl" class="no-image">
+          <span>Aucune image</span>
+        </div>
+      </div>
+
+      <!-- Badge de disponibilité -->
+      <div class="availability-badge" [class.available]="car.available" [class.unavailable]="!car.available">
+        {{ car.available ? 'Disponible' : 'Indisponible' }}
+      </div>
+
+      <!-- Contenu de la card -->
+      <div class="car-content">
+        <h3 class="car-title">{{ car.brand }}</h3>
+        <p class="car-model">{{ car.model }}</p>
+        <p class="car-category">{{ car.category }}</p>
+        <div class="car-price">{{ car.pricePerDay | currency:'EUR' }} / jour</div>
+        <div class="car-availability">{{ car.available ? 'Oui' : 'Non' }}</div>
+      </div>
+    </div>
+  </div>
 </div>
-```
