@@ -129,6 +129,59 @@ h2 {
   font-size: 0.9em;
   color: #34495e;
   font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.car-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.btn-reserve {
+  background: #2ed573;
+  color: white;
+}
+
+.btn-reserve:hover:not(:disabled) {
+  background: #26d164;
+  box-shadow: 0 4px 10px rgba(46, 213, 115, 0.3);
+}
+
+.btn-reserve:disabled {
+  background: #95a5a6;
+}
+
+.btn-delete {
+  background: #ff4757;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #ff3742;
+  box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
 }
 
 /* Responsive */
@@ -144,5 +197,13 @@ h2 {
 
   h2 {
     font-size: 1.6em;
+  }
+
+  .car-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    margin-bottom: 5px;
   }
 }

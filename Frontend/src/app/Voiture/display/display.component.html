@@ -42,7 +42,20 @@
         <p class="car-model">{{ car.model }}</p>
         <p class="car-category">{{ car.category }}</p>
         <div class="car-price">{{ car.pricePerDay | currency:'EUR' }} / jour</div>
-        <div class="car-availability">{{ car.available ? 'Oui' : 'Non' }}</div>
+
+
+        <!-- Boutons d'action -->
+        <div class="car-actions">
+          <button
+            class="btn btn-reserve"
+            [disabled]="!car.available">
+            {{ car.available ? 'Réserver' : 'Indisponible' }}
+          </button>
+          <button
+            class="btn btn-delete">
+            Supprimer
+          </button>
+        </div>
       </div>
     </div>
   </div>
