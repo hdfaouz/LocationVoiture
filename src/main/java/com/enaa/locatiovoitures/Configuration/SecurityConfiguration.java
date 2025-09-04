@@ -10,6 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -26,22 +32,34 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .requestMatchers("/voiture/**").hasAuthority(Role.ADMIN.name())
-                .requestMatchers("/reservation/**").hasAnyAuthority(Role.CLIENT.name())
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
+                .csrf(csrf -> csrf.disable()) // Disable CSRF (already present)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/auth/**").permitAll() // Allow auth endpoints
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow all OPTIONS requests
+                        .requestMatchers(HttpMethod.POST, "/voiture").permitAll() // Temporarily allow POST /voiture for testing
+                        .requestMatchers("/voiture/**").hasAuthority(Role.ADMIN.name()) // Restrict other /voiture endpoints
+                        .requestMatchers("/reservation/**").hasAuthority(Role.CLIENT.name()) // Client reservation endpoints
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

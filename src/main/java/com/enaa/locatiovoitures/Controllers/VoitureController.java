@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/voiture")
-@CrossOrigin(origins = "http://localhost:4200")
 public class VoitureController {
 
     private final VoitureService voitureService;
@@ -18,7 +17,7 @@ public class VoitureController {
         this.voitureService = voitureService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping
     public VoitureDto ajouterVoiture(@RequestBody VoitureDto voitureDto){
         return voitureService.ajouterVoiture(voitureDto);
