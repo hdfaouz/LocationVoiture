@@ -2,9 +2,11 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {VoitureService} from "../../services/voiture/voiture.service";
 import {CommonModule} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 
 export interface Car {
+  id: string;
   brand: string;
   model: string;
   category: string;
@@ -17,7 +19,8 @@ export interface Car {
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.css'

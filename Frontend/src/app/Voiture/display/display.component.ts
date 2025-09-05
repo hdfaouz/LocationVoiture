@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {VoitureService} from "../../services/voiture/voiture.service";
 import {Car} from "../add/add.component";
 import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
@@ -14,27 +14,60 @@ import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
   templateUrl: './display.component.html',
   styleUrl: './display.component.css'
 })
-export class DisplayComponent {
+export class DisplayComponent implements OnInit {
   cars: Car[] = [];
   errorMessage: string | null = null;
 
-  constructor(private voitureService: VoitureService) {}
+  constructor(private voitureService: VoitureService) {
+  }
 
   ngOnInit(): void {
+    console.log('ngOnInit appelé - Chargement des voitures...');
     this.loadCars();
   }
 
   loadCars(): void {
+    console.log('Appel de getCars()');
     this.voitureService.getCars().subscribe({
       next: (cars) => {
-        this.cars = cars;
+        console.log('Voitures reçues:', cars);
+        this.cars = cars || [];
         this.errorMessage = null;
       },
       error: (error) => {
+        console.error('Erreur lors du chargement:', error);
         this.errorMessage = error.message || 'Failed to load cars. Please try again later.';
-        console.error('Error loading cars:', error);
+        this.cars = []; // S'assurer que cars est vide en cas d'erreur
       }
     });
   }
 
+  /**
+   * Fonction pour supprimer une voiture
+   */
+  onDelete(car: Car): void {
+    const confirmation = confirm(
+      `Êtes-vous sûr de vouloir supprimer la ${car.brand} ${car.model} ?`
+    );
+
+    if (!confirmation) {
+      return;
+    }
+
+    console.log('Suppression de:', car);
+    this.voitureService.deleteCar(car.id!).subscribe({
+      next: (response) => {
+        console.log('Suppression réussie:', response);
+        // Supprimer la voiture de la liste locale
+        this.cars = this.cars.filter(c => c.id !== car.id);
+        alert(`${car.brand} ${car.model} a été supprimée avec succès !`);
+      },
+      error: (error) => {
+        console.error('Erreur lors de la suppression:', error);
+        alert(`Erreur : Impossible de supprimer ${car.brand} ${car.model}`);
+      }
+    });
+  }
 }
+
+

@@ -1,61 +1,52 @@
-<div class="container">
-  <h2>Liste des Voitures</h2>
+<!-- Loading state -->
+<div *ngIf="!cars.length && !errorMessage" class="loading">
+  Chargement des voitures...
+</div>
 
-  <!-- Error message -->
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
+<!-- Cars cards -->
+<div *ngIf="cars.length" class="cars-grid">
+  <div *ngFor="let car of cars" class="car-card">
 
-  <!-- Loading state -->
-  <div *ngIf="!cars.length && !errorMessage" class="loading">
-    Chargement des voitures...
-  </div>
-
-  <!-- Cars cards -->
-  <div *ngIf="cars.length" class="cars-grid">
-    <div *ngFor="let car of cars" class="car-card">
-
-      <!-- Image de la voiture -->
-      <div class="car-image">
-        <img
-          *ngIf="car.imageUrl"
-          [src]="car.imageUrl"
-          [alt]="car.brand + ' ' + car.model"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
-        >
-        <div class="no-image" style="display: none;">
-          <span>Image non disponible</span>
-        </div>
-        <div *ngIf="!car.imageUrl" class="no-image">
-          <span>Aucune image</span>
-        </div>
+    <!-- Image de la voiture -->
+    <div class="car-image">
+      <img
+        *ngIf="car.imageUrl"
+        [src]="car.imageUrl"
+        [alt]="car.brand + ' ' + car.model"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+      >
+      <div class="no-image" style="display: none;">
+        <span>Image non disponible</span>
       </div>
-
-      <!-- Badge de disponibilité -->
-      <div class="availability-badge" [class.available]="car.available" [class.unavailable]="!car.available">
-        {{ car.available ? 'Disponible' : 'Indisponible' }}
+      <div *ngIf="!car.imageUrl" class="no-image">
+        <span>Aucune image</span>
       </div>
+    </div>
 
-      <!-- Contenu de la card -->
-      <div class="car-content">
-        <h3 class="car-title">{{ car.brand }}</h3>
-        <p class="car-model">{{ car.model }}</p>
-        <p class="car-category">{{ car.category }}</p>
-        <div class="car-price">{{ car.pricePerDay | currency:'EUR' }} / jour</div>
+    <!-- Badge de disponibilité -->
+    <div class="availability-badge" [class.available]="car.available" [class.unavailable]="!car.available">
+      {{ car.available ? 'Disponible' : 'Indisponible' }}
+    </div>
 
+    <!-- Contenu de la card -->
+    <div class="car-content">
+      <h3 class="car-title">{{ car.brand }}</h3>
+      <p class="car-model">{{ car.model }}</p>
+      <p class="car-category">{{ car.category }}</p>
+      <div class="car-price">{{ car.pricePerDay | currency:'EUR' }} / jour</div>
 
-        <!-- Boutons d'action -->
-        <div class="car-actions">
-          <button
-            class="btn btn-reserve"
-            [disabled]="!car.available">
-            {{ car.available ? 'Réserver' : 'Indisponible' }}
-          </button>
-          <button
-            class="btn btn-delete">
-            Supprimer
-          </button>
-        </div>
+      <!-- Boutons d'action -->
+      <div class="car-actions">
+        <button
+          class="btn btn-reserve"
+          [disabled]="!car.available">
+          {{ car.available ? 'Réserver' : 'Indisponible' }}
+        </button>
+        <button
+          class="btn btn-delete"
+          (click)="onDelete(car)">
+          Supprimer
+        </button>
       </div>
     </div>
   </div>
