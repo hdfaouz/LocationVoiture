@@ -37,47 +37,56 @@ export class LoginComponent implements OnInit{
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
 
-
-  onSumbit():void{
-    this.errorMessage='';
-    this.successMessage='';
-    this.loading=true;
+  onSumbit(): void {
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.loading = true;
 
     if (this.loginForm.valid) {
-
       console.log(this.loginForm.value);
       const dataLogin = this.loginForm.value;
 
       this.authService.login(dataLogin).subscribe({
-
         next: (response) => {
           this.authService.saveUserData(response);
-          // this.snackBar.open('login successful','close',{duration:4000});
-          // this.router.navigate(['/parkings']);
-
           this.authService.saveToken(response.token);
           this.authService.saveRole(response.user.role);
+
           console.log('FULL LOGIN RESPONSE:', response.user);
-
           console.log('saved token : ', response.token);
-          console.log('user  is:', response.user);
+          console.log('user is:', response.user);
 
-          switch(response.user.role) {
-            case 'ADMIN':
-              this.router.navigate(['/add']);
-              break;
+          this.successMessage = 'Connexion réussie !';
 
-            case 'CLIENT':
-              this.router.navigate(['/register']);
-              break;
-            default:
-              this.router.navigate(['/']);
-          }
+          // Redirection basée sur le rôle
+          this.redirectBasedOnRole(response.user.role);
         },
-        error: (err)=>{
-          this.errorMessage = typeof err === 'string' ? err : 'Login failed';
+        error: (err) => {
+          console.error('Login error:', err);
+          this.errorMessage = err?.error?.message || 'Email ou mot de passe incorrect';
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
         }
-      })
+      });
+    } else {
+      this.loading = false;
+      this.errorMessage = 'Veuillez remplir tous les champs correctement';
+    }
+  }
+
+  private redirectBasedOnRole(role: string): void {
+    switch(role) {
+      case 'ADMIN':
+        this.router.navigate(['/add']);
+        break;
+      case 'USER':
+      case 'CLIENT':
+        this.router.navigate(['/home']);
+        break;
+      default:
+        this.router.navigate(['/home']);
     }
 
 

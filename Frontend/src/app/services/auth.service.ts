@@ -82,19 +82,28 @@ export class AuthService {
     }
   }
 
+  isLoggedIn(): boolean {
+    const user = this.getCurrentUser();
+    const isLoggedIn = !!user;
+    console.log('isLoggedIn() appelée');
+    console.log('User actuel:', user);
+    console.log('Résultat isLoggedIn:', isLoggedIn);
+    return isLoggedIn;
+  }
+
+  getCurrentUser(): User | null {
+    const user = this.currentUserSubject.value;
+    console.log('getCurrentUser() appelée, résultat:', user);
+    return user;
+  }
+
   logout(): void {
+    console.log('Logout appelé');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('role');
     this.currentUserSubject.next(null);
-  }
-
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getCurrentUser();
+    console.log('Données supprimées, currentUserSubject mis à null');
   }
 
   getRole(): string | null {

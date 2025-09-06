@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
+import {AuthService} from "./services/auth.service";
 
 
 @Component({
@@ -13,4 +14,5 @@ import {FooterComponent} from "./footer/footer.component";
 })
 export class AppComponent {
   title = 'Frontend';
+
 }
