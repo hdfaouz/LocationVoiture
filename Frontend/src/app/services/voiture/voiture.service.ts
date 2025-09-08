@@ -12,7 +12,7 @@ export class VoitureService {
 
   constructor(private http: HttpClient) {}
 
-  // Méthode pour obtenir les headers avec le token JWT
+
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     let headers = new HttpHeaders({
@@ -26,21 +26,18 @@ export class VoitureService {
     return headers;
   }
 
-  // Méthode pour gérer les erreurs HTTP
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Une erreur est survenue';
 
     if (error.error instanceof ErrorEvent) {
-      // Erreur côté client
       errorMessage = `Erreur: ${error.error.message}`;
     } else {
-      // Erreur côté serveur
       errorMessage = `Code d'erreur: ${error.status}, Message: ${error.message}`;
 
       if (error.status === 401) {
         errorMessage = 'Token expiré ou invalide. Veuillez vous reconnecter.';
-        // Optionnel: rediriger vers la page de login
-        // this.router.navigate(['/login']);
+
       } else if (error.status === 403) {
         errorMessage = 'Accès refusé. Vous n\'avez pas les permissions nécessaires.';
       } else if (error.status === 404) {
@@ -97,7 +94,7 @@ export class VoitureService {
     );
   }
 
-  // Méthodes spécifiques aux voitures
+
   getCarsByCategory(category: string): Observable<Car[]> {
     return this.http.get<Car[]>(`${this.apiUrl}/category/${category}`, {
       headers: this.getHeaders(),
@@ -133,7 +130,7 @@ export class VoitureService {
     );
   }
 
-  // Méthode pour rafraîchir le token si nécessaire
+
   refreshToken(): Observable<any> {
     const refreshToken = localStorage.getItem('refreshToken');
     return this.http.post<any>('http://localhost:8080/api/auth/refresh',
