@@ -1,13 +1,12 @@
-<!-- Loading state -->
+
 <div *ngIf="!cars.length && !errorMessage" class="loading">
   Chargement des voitures...
 </div>
 
-<!-- Cars cards -->
 <div *ngIf="cars.length" class="cars-grid">
   <div *ngFor="let car of cars" class="car-card">
 
-    <!-- Image de la voiture -->
+
     <div class="car-image">
       <img
         *ngIf="car.imageUrl"
@@ -23,19 +22,19 @@
       </div>
     </div>
 
-    <!-- Badge de disponibilité -->
+
     <div class="availability-badge" [class.available]="car.available" [class.unavailable]="!car.available">
       {{ car.available ? 'Disponible' : 'Indisponible' }}
     </div>
 
-    <!-- Contenu de la card -->
+
     <div class="car-content">
       <h3 class="car-title">{{ car.brand }}</h3>
       <p class="car-model">{{ car.model }}</p>
       <p class="car-category">{{ car.category }}</p>
       <div class="car-price">{{ car.pricePerDay | currency:'EUR' }} / jour</div>
 
-      <!-- Boutons d'action -->
+
       <div class="car-actions">
         <button
           class="btn btn-reserve"

@@ -37,14 +37,12 @@ export class DisplayComponent implements OnInit {
       error: (error) => {
         console.error('Erreur lors du chargement:', error);
         this.errorMessage = error.message || 'Failed to load cars. Please try again later.';
-        this.cars = []; // S'assurer que cars est vide en cas d'erreur
+        this.cars = [];
       }
     });
   }
 
-  /**
-   * Fonction pour supprimer une voiture
-   */
+
   onDelete(car: Car): void {
     const confirmation = confirm(
       `Êtes-vous sûr de vouloir supprimer la ${car.brand} ${car.model} ?`
@@ -58,7 +56,6 @@ export class DisplayComponent implements OnInit {
     this.voitureService.deleteCar(car.id!).subscribe({
       next: (response) => {
         console.log('Suppression réussie:', response);
-        // Supprimer la voiture de la liste locale
         this.cars = this.cars.filter(c => c.id !== car.id);
         alert(`${car.brand} ${car.model} a été supprimée avec succès !`);
       },
