@@ -16,7 +16,6 @@ export interface LoginResponse {
 
 export interface User{
   email: string;
-  //password: string;  // facultatif : mais attention, ce n'est **jamais** recommandé de renvoyer le mot de passe au frontend
   role: string;
 }
 
@@ -41,11 +40,11 @@ export class AuthService {
     if (typeof Storage !== 'undefined' && localStorage) {
       const userData = localStorage.getItem('user');
 
-      // Check if userData exists, is not null, and is not the string 'undefined'
+
       if (userData && userData !== 'undefined' && userData !== 'null') {
         try {
           const parsedUser = JSON.parse(userData);
-          // Validate that the parsed data has the expected structure
+
           if (parsedUser && typeof parsedUser === 'object' && parsedUser.email && parsedUser.role) {
             return parsedUser;
           } else {
@@ -55,7 +54,7 @@ export class AuthService {
           }
         } catch (error) {
           console.error('Error parsing user data from localStorage:', error);
-          // Clear corrupted data
+
           localStorage.removeItem('user');
           return null;
         }
