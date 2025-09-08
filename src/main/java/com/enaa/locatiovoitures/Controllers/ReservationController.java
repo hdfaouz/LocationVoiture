@@ -17,7 +17,7 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-    @PreAuthorize("hasRole('CLIENT')")
+
     @PostMapping
     public ReservationDto ajouter(@RequestBody ReservationDto reservationDto){
         return reservationService.ajouter(reservationDto);

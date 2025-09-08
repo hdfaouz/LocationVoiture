@@ -1,19 +1,19 @@
 <div class="form-container">
   <h1 class="form-title">🚗 Ajouter une Voiture</h1>
 
-  <!-- Message de succès -->
+
   <div *ngIf="submitSuccess" class="success-message">
     Voiture ajoutée avec succès !
   </div>
 
-  <!-- Message d'erreur -->
+
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
   <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
 
-    <!-- Marque -->
+
     <div class="form-group">
       <label class="form-label" for="brand">Marque *</label>
       <input
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <!-- Modèle -->
+
     <div class="form-group">
       <label class="form-label" for="model">Modèle *</label>
       <input
@@ -64,9 +64,9 @@
       </div>
     </div>
 
-    <!-- Prix -->
+
     <div class="form-group">
-      <label class="form-label" for="pricePerDay">Prix par jour (€) *</label>
+      <label class="form-label" for="pricePerDay">Prix par jour (DH) *</label>
       <input
         type="number"
         id="pricePerDay"
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <!-- Disponibilité -->
+
     <div class="form-group">
       <div class="checkbox-group">
         <input
@@ -98,7 +98,7 @@
       </div>
     </div>
 
-    <!-- Image URL -->
+
     <div class="form-group">
       <label class="form-label" for="imageUrl">URL de l'image</label>
       <input
@@ -113,7 +113,7 @@
       </div>
     </div>
 
-    <!-- Bouton de soumission -->
+
     <button
       type="submit"
       class="submit-btn"

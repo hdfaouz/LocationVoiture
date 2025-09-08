@@ -16,7 +16,6 @@ export interface LoginResponse {
 
 export interface User{
   email: string;
-  //password: string;  // facultatif : mais attention, ce n'est **jamais** recommandé de renvoyer le mot de passe au frontend
   role: string;
 }
 
@@ -55,7 +54,7 @@ export class AuthService {
           }
         } catch (error) {
           console.error('Error parsing user data from localStorage:', error);
-          // Clear corrupted data
+
           localStorage.removeItem('user');
           return null;
         }
@@ -127,4 +126,5 @@ export class AuthService {
       localStorage.setItem('role', role);
     }
   }
+
 }

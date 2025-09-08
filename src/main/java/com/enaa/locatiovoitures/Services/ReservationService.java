@@ -66,8 +66,8 @@ public class ReservationService {
     }
 
     public ReservationDto getById(Long id){
-        Reservation foundCompetence =reservationRepository.findById(id)
+        Reservation foundReservation =reservationRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("book not found"));
-        return reservationMap.toDto(foundCompetence);
+        return reservationMap.toDto(foundReservation);
     }
 }

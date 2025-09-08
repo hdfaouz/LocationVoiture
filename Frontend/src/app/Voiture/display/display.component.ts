@@ -70,4 +70,3 @@ export class DisplayComponent implements OnInit {
   }
 }
 
-
