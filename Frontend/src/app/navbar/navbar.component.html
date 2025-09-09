@@ -5,10 +5,12 @@
   <div class="links">
     <a href="/home" routerLinkActive="active">Home</a>
     <a routerLink="/add" routerLinkActive="active">Rentals</a>
-    <a routerLink="#" routerLinkActive="active">Blog</a>
     <a routerLink="/cars" routerLinkActive="active">cars</a>
     <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
-    <a routerLink="/register" routerLinkActive="active">Sign up</a>
-    <a routerLink="/login" routerLinkActive="active"><button class="login-btn">Login</button></a>
+    <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
+      <button class="login-btn">Login</button>
+    </a>
+    <a *ngIf="authService.isLoggedIn()" href="#" (click)="onLogout()">Logout</a>
+
   </div>
 </nav>
