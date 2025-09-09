@@ -15,7 +15,14 @@ import {NgIf} from "@angular/common";
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent{
+  isLoggedIn: boolean = false;
+  role: string | null = null;
   constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.role = this.authService.getRole();
+  }
 
   onLogout(): void {
     this.authService.logout();

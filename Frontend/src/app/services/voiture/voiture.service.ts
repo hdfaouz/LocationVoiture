@@ -61,7 +61,6 @@ export class VoitureService {
   getCars(): Observable<Car[]> {
     return this.http.get<Car[]>(this.apiUrl, {
       headers: this.getHeaders(),
-      withCredentials: true
     }).pipe(
       catchError(this.handleError)
     );
