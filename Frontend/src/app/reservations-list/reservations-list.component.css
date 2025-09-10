@@ -1,0 +1,111 @@
+/* Global container styling */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #2c2c2c; /* Dark background for the container */
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+/* Page title */
+h2 {
+  text-align: center;
+  color: #ff6b35; /* Orange accent color */
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  border-collapse: collapse; /* Remove gaps between cells */
+  margin-top: 20px;
+}
+
+/* Table header styling */
+.table thead tr {
+  background-color: #ff6b35; /* Orange background for the header */
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.table th {
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 1em;
+}
+
+/* Table body styling */
+.table tbody tr {
+  background-color: #3a3a3a; /* Slightly lighter dark color for rows */
+  border-bottom: 1px solid #444; /* Separator line */
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background-color: #4a4a4a; /* Highlight on hover */
+}
+
+.table td {
+  padding: 15px 20px;
+  font-size: 1em;
+  color: #ecf0f1; /* Light text for data */
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .table, .table thead, .table tbody, .table th, .table td, .table tr {
+    display: block;
+  }
+
+  .table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .table tr {
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+
+  .table td {
+    border: none;
+    border-bottom: 1px solid #444;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  .table td:before {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: #ff6b35;
+    content: attr(data-label);
+  }
+
+  /* Assigning labels for responsive view */
+  .table td:nth-of-type(1) { content: "Date de début"; }
+  .table td:nth-of-type(2) { content: "Date de fin"; }
+  .table td:nth-of-type(3) { content: "Prix total"; }
+  .table td:nth-of-type(4) { content: "Status"; }
+}

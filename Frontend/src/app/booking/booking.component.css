@@ -42,6 +42,7 @@ h2 {
   color: white;
   font-size: 1em;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color-scheme: dark; /* Hint for the browser to use dark-mode controls */
 }
 
 .form-control:focus {

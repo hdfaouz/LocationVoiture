@@ -11,10 +11,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let reservation of reservations">
-        <td>{{ reservation.startDate }}</td>
-        <td>{{ reservation.endDate }}</td>
-        <td>{{ reservation.totalPrice }}</td>
-        <td>{{ reservation.status }}</td>
+        <td data-label="Date de début">{{ reservation.startDate | date:'dd/MM/yyyy' }}</td>
+        <td data-label="Date de fin">{{ reservation.endDate | date:'dd/MM/yyyy' }}</td>
+        <td data-label="Prix total">{{ reservation.totalPrice | currency:'EUR' }}</td>
+        <td data-label="Status">{{ reservation.status }}</td>
       </tr>
     </tbody>
   </table>
