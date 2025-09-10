@@ -23,8 +23,7 @@ export class RegisterComponent implements OnInit{
     this.registerForm= this.formBuilder.group({
       name:['',[Validators.required]],
       email:['',[Validators.required]],
-      password:['',[Validators.required]],
-      role:['',[Validators.required]]
+      password:['',[Validators.required]]
     });
 
 
@@ -36,8 +35,11 @@ export class RegisterComponent implements OnInit{
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      const data :  RegisterRequest= this.registerForm.value;
+      const formValue = this.registerForm.value;
+      const data: RegisterRequest = {
+        ...formValue,
+        role: 'CLIENT'
+      };
       this.authService.register(data).subscribe({
         next : (response) =>{
           this.successMessage = 'Registration successful';
