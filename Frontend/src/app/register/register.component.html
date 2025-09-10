@@ -1,11 +1,9 @@
-<!-- signup.html -->
+
 <div class="signup-container">
-  <!-- Background overlay -->
   <div class="signup-background"></div>
 
-  <!-- Signup form card -->
+
   <div class="signup-card">
-    <!-- Header -->
     <div class="signup-header">
       <div class="logo-section">
         <div class="logo-icon">
@@ -18,10 +16,9 @@
       <p class="signup-subtitle">Create your account and start book your car</p>
     </div>
 
-    <!-- Signup Form -->
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="signup-form">
 
-      <!-- Name Field -->
+
       <div class="form-group">
         <label for="name" class="form-label">Full Name</label>
         <div class="input-wrapper">
@@ -45,7 +42,7 @@
         </div>
       </div>
 
-      <!-- Email Field -->
+
       <div class="form-group">
         <label for="email" class="form-label">Email Address</label>
         <div class="input-wrapper">
@@ -70,7 +67,7 @@
         </div>
       </div>
 
-      <!-- Password Field -->
+
       <div class="form-group">
         <label for="password" class="form-label">Password</label>
         <div class="input-wrapper">
@@ -95,7 +92,7 @@
         </div>
       </div>
 
-      <!-- Role Selection -->
+
       <div class="form-group">
         <label for="role" class="form-label">Account Type</label>
         <div class="input-wrapper">
@@ -119,7 +116,7 @@
         </div>
       </div>
 
-      <!-- Terms and Privacy -->
+
       <div class="terms-section">
         <label class="checkbox-wrapper">
           <input type="checkbox" class="checkbox" required>
@@ -132,7 +129,7 @@
         </label>
       </div>
 
-      <!-- Error and Success Messages -->
+
       <div class="message-container">
         <div class="error-banner" *ngIf="errorMessage">
           <svg class="message-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -149,7 +146,7 @@
         </div>
       </div>
 
-      <!-- Submit Button -->
+
       <button
         type="submit"
         class="signup-button"
@@ -173,12 +170,12 @@
         </span>
       </button>
 
-      <!-- Divider -->
+
       <div class="divider">
         <span class="divider-text">or</span>
       </div>
 
-      <!-- Social Signup Options -->
+
       <div class="social-signup">
         <button type="button" class="social-button google">
           <svg class="social-icon" viewBox="0 0 24 24">
@@ -191,7 +188,7 @@
         </button>
       </div>
 
-      <!-- Login link -->
+
       <div class="login-link">
         <span>Already have an account?</span>
         <a routerLink="/login" class="login-button-link">Sign in</a>
@@ -199,7 +196,7 @@
     </form>
   </div>
 
-  <!-- Decorative elements -->
+
   <div class="decorative-elements">
     <div class="floating-element element-1"></div>
     <div class="floating-element element-2"></div>

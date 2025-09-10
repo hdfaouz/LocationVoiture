@@ -38,10 +38,10 @@
       <div class="car-actions">
         <button
           class="btn btn-reserve"
-          [disabled]="!car.available">
-          {{ car.available ? 'Réserver' : 'Indisponible' }}
+          [routerLink]="['/booking', car.id]">
+          Réserver
         </button>
-        <button
+        <button *ngIf="isAdmin()"
           class="btn btn-delete"
           (click)="onDelete(car)">
           Supprimer

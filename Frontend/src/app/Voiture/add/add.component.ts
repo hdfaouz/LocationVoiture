@@ -20,7 +20,7 @@ export interface Car {
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    RouterLink
+
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.css'
@@ -100,7 +100,7 @@ export class AddComponent {
     }
   }
 
-  // Méthode pour afficher les erreurs de validation
+
   hasError(controlName: string, errorName: string): boolean {
     const control = this.carForm.get(controlName);
     return control ? control.hasError(errorName) && control.touched : false;

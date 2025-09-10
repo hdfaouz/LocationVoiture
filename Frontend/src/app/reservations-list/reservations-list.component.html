@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Mes réservations</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date de début</th>
+        <th>Date de fin</th>
+        <th>Prix total</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ reservation.startDate }}</td>
+        <td>{{ reservation.endDate }}</td>
+        <td>{{ reservation.totalPrice }}</td>
+        <td>{{ reservation.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -4,9 +4,8 @@
     <div class="car-silhouette"></div>
   </div>
 
-  <!-- Carte de connexion -->
+
   <div class="login-card">
-    <!-- En-tête -->
     <div class="login-header">
       <div class="logo-container">
         <div class="logo-icon">
@@ -21,9 +20,9 @@
       <p class="welcome-text">Conduisez votre aventure</p>
     </div>
 
-    <!-- Formulaire -->
+
     <form [formGroup]="loginForm" (ngSubmit)="onSumbit()" class="auth-form">
-      <!-- Champ Email -->
+
       <div class="input-field">
         <label>Email</label>
         <div class="input-container">
@@ -38,7 +37,7 @@
         </div>
       </div>
 
-      <!-- Champ Mot de passe -->
+
       <div class="input-field">
         <label>Mot de passe</label>
         <div class="input-container">
@@ -53,7 +52,7 @@
         </div>
       </div>
 
-      <!-- Options -->
+
       <div class="form-options">
         <label class="remember-me">
           <input type="checkbox">
@@ -62,7 +61,7 @@
         <a href="#" class="forgot-password">Mot de passe oublié ?</a>
       </div>
 
-      <!-- Bouton de connexion -->
+
       <button type="submit" class="submit-btn">
         <span>Se connecter</span>
         <svg class="arrow-icon" viewBox="0 0 24 24">
@@ -70,14 +69,14 @@
         </svg>
       </button>
 
-      <!-- Séparateur -->
+
       <div class="separator">
         <div class="line"></div>
         <span>ou</span>
         <div class="line"></div>
       </div>
 
-      <!-- Inscription -->
+
       <div class="signup-prompt">
         <span>Nouveau chez CarRental ?</span>
         <a routerLink="/register" class="register-link">Créer un compte</a>

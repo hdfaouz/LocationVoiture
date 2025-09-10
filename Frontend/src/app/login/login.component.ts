@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit{
 
           this.successMessage = 'Connexion réussie !';
 
-          // Redirection basée sur le rôle
           this.redirectBasedOnRole(response.user.role);
         },
         error: (err) => {

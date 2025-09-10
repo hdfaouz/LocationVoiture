@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {VoitureService} from "../../services/voiture/voiture.service";
 import {Car} from "../add/add.component";
 import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-display',
@@ -9,7 +10,8 @@ import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
   imports: [
     NgIf,
     CurrencyPipe,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './display.component.html',
   styleUrl: './display.component.css'
@@ -17,6 +19,7 @@ import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
 export class DisplayComponent implements OnInit {
   cars: Car[] = [];
   errorMessage: string | null = null;
+  role  =localStorage.getItem("role");
 
   constructor(private voitureService: VoitureService) {
   }
@@ -24,6 +27,15 @@ export class DisplayComponent implements OnInit {
   ngOnInit(): void {
     console.log('ngOnInit appelé - Chargement des voitures...');
     this.loadCars();
+  }
+
+  isAdmin():boolean{
+    if(this.role == "ADMIN"){
+      return true;
+    }
+    else{
+      return false
+    }
   }
 
   loadCars(): void {
@@ -65,6 +77,8 @@ export class DisplayComponent implements OnInit {
       }
     });
   }
+
+
 }
 
 
