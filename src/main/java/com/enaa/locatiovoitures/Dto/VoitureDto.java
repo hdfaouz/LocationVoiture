@@ -3,6 +3,7 @@ package com.enaa.locatiovoitures.Dto;
 
 public class VoitureDto {
 
+    private Long id;
     private String brand;
     private String model;
     private String category;
@@ -13,13 +14,22 @@ public class VoitureDto {
     public VoitureDto() {
     }
 
-    public VoitureDto(String brand, String model, String category, double pricePerDay, boolean available, String imageUrl) {
+    public VoitureDto(Long id, String brand, String model, String category, double pricePerDay, boolean available, String imageUrl) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.category = category;
         this.pricePerDay = pricePerDay;
         this.available = available;
         this.imageUrl = imageUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBrand() {

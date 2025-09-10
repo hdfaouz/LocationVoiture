@@ -32,14 +32,16 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
-                .csrf(csrf -> csrf.disable()) // Disable CSRF (already present)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll() // Allow auth endpoints
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow all OPTIONS requests
-                        .requestMatchers(HttpMethod.POST, "/voiture").permitAll() // Temporarily allow POST /voiture for testing
-                        .requestMatchers("/voiture/**").hasAuthority(Role.ADMIN.name()) // Restrict other /voiture endpoints
-                        .requestMatchers("/reservation/**").hasAuthority(Role.CLIENT.name()) // Client reservation endpoints
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/voiture").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/voiture", "/voiture/**").hasAnyAuthority(Role.ADMIN.name(), Role.CLIENT.name())
+                        .requestMatchers("/voiture/**").hasAuthority(Role.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST,"/reservation").hasAnyAuthority(Role.ADMIN.name(), Role.CLIENT.name())
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

@@ -17,26 +17,26 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     @PostMapping
     public ReservationDto ajouter(@RequestBody ReservationDto reservationDto){
         return reservationService.ajouter(reservationDto);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     @GetMapping
     public List<ReservationDto> getAll(){
 
         return reservationService.getAll();
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT')")
     @DeleteMapping("/{id}")
     public void delet(@PathVariable Long id){
 
         reservationService.deletReservation(id);
     }
-    @PreAuthorize("hasAnyRole('ADMIN','Client')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT')")
     @PutMapping("/{id}")
     public ReservationDto update(@PathVariable Long id, @RequestBody ReservationDto reservationDto){
         return reservationService.update(id,reservationDto);

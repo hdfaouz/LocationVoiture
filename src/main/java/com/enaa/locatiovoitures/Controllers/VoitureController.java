@@ -28,7 +28,7 @@ public class VoitureController {
         return voitureService.getAllVoitures();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @DeleteMapping("/{id}")
     public void deletVoiture( @PathVariable Long id){
         voitureService.deletVoiture(id);

@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Entity
 @AllArgsConstructor
@@ -40,7 +40,7 @@ public class Reservation {
         this.id = id;
     }
 
-    public LocalDate getStartDate(LocalDateTime now) {
+    public LocalDate getStartDate() {
         return startDate;
     }
 

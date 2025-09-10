@@ -126,7 +126,7 @@ public class ReservationTest {
         reservation1.setId(1L);
         reservation1.setClient(client1);
         reservation1.setVoiture(voiture1);
-        reservation1.getStartDate(LocalDateTime.now());
+        reservation1.setStartDate(LocalDate.from(LocalDateTime.now()));
         reservation1.setEndDate(LocalDate.from(LocalDateTime.now().plusDays(3)));
 
         Reservation reservation2 = new Reservation();
@@ -141,13 +141,13 @@ public class ReservationTest {
         ReservationDto reservationDto1 = new ReservationDto();
         reservationDto1.setClientId(1L);
         reservationDto1.setVoitureId(1L);
-        reservationDto1.setStartDate(reservation1.getStartDate(LocalDateTime.now()));
+        reservationDto1.setStartDate(reservation1.getStartDate());
         reservationDto1.setEndDate(reservation1.getEndDate());
 
         ReservationDto reservationDto2 = new ReservationDto();
         reservationDto2.setClientId(2L);
         reservationDto2.setVoitureId(2L);
-        reservationDto2.setStartDate(reservation2.getStartDate(LocalDateTime.now()));
+        reservationDto2.setStartDate(reservation2.getStartDate());
         reservationDto2.setEndDate(reservation2.getEndDate());
 
         List<ReservationDto> expectedDtos = Arrays.asList(reservationDto1, reservationDto2);
