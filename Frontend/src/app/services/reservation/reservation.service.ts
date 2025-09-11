@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import {  Observable } from "rxjs";
 
 export interface Reservation {
+  id: number;
   carId: number;
   userId: string;
   startDate: Date;
@@ -26,6 +27,10 @@ export class ReservationService {
   }
 
   getAll(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(this.apiUrl);
+    return this.http.get<Reservation[]>(`${this.apiUrl}/all`);
+  }
+
+  deleteReservation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

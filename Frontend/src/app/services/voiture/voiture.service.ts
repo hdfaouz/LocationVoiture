@@ -66,7 +66,7 @@ export class VoitureService {
     );
   }
 
-  getCarById(id: string): Observable<Car> {
+  getCarById(id: number): Observable<Car> {
     return this.http.get<Car>(`${this.apiUrl}/${id}`, {
       headers: this.getHeaders(),
       withCredentials: true

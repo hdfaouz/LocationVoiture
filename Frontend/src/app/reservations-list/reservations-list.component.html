@@ -3,18 +3,25 @@
   <table class="table">
     <thead>
       <tr>
+        <th *ngIf="isAdmin">Client</th>
         <th>Date de début</th>
         <th>Date de fin</th>
         <th>Prix total</th>
         <th>Status</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let reservation of reservations">
+        <td *ngIf="isAdmin" data-label="Client">{{ reservation.clientName }}</td>
         <td data-label="Date de début">{{ reservation.startDate | date:'dd/MM/yyyy' }}</td>
         <td data-label="Date de fin">{{ reservation.endDate | date:'dd/MM/yyyy' }}</td>
         <td data-label="Prix total">{{ reservation.totalPrice | currency:'EUR' }}</td>
         <td data-label="Status">{{ reservation.status }}</td>
+        <td data-label="Actions" class="actions-cell">
+          <button class="btn btn-edit" (click)="onEdit(reservation.id)">Modifier</button>
+          <button class="btn btn-delete" (click)="onDelete(reservation.id)">Supprimer</button>
+        </td>
       </tr>
     </tbody>
   </table>

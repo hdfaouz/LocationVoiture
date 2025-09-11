@@ -84,15 +84,11 @@ export class AuthService {
   isLoggedIn(): boolean {
     const user = this.getCurrentUser();
     const isLoggedIn = !!user;
-    console.log('isLoggedIn() appelée');
-    console.log('User actuel:', user);
-    console.log('Résultat isLoggedIn:', isLoggedIn);
     return isLoggedIn;
   }
 
   getCurrentUser(): User | null {
     const user = this.currentUserSubject.value;
-    console.log('getCurrentUser() appelée, résultat:', user);
     return user;
   }
 
@@ -125,5 +121,8 @@ export class AuthService {
     if (role && role !== 'undefined') {
       localStorage.setItem('role', role);
     }
+  }
+  isAdmin(): boolean {
+    return this.getRole() === 'ADMIN';
   }
 }
