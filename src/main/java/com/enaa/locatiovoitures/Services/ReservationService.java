@@ -4,6 +4,7 @@ import com.enaa.locatiovoitures.Dto.ReservationDto;
 import com.enaa.locatiovoitures.Mappers.ReservationMap;
 import com.enaa.locatiovoitures.Model.Client;
 import com.enaa.locatiovoitures.Model.Reservation;
+import com.enaa.locatiovoitures.Model.ReservationStatus;
 import com.enaa.locatiovoitures.Model.Voiture;
 import com.enaa.locatiovoitures.Repositories.ReservationRepository;
 import com.enaa.locatiovoitures.Repositories.UserRepository;
@@ -38,6 +39,9 @@ public class ReservationService {
         reservation.setClient(client);
         Voiture voiture = voitureRepository.findById(reservationDto.getVoitureId()).orElseThrow(() -> new EntityNotFoundException("Voiture non trouvé"));
         reservation.setVoiture(voiture);
+        if (reservationDto.getStatus()== null){
+            reservation.setStatus(ReservationStatus.EN_ATTENTE);
+        }
         Reservation saveReservation = reservationRepository.save(reservation);
         return reservationMap.toDto(saveReservation);
     }
@@ -54,13 +58,9 @@ public class ReservationService {
     public ReservationDto update(Long id, ReservationDto dto){
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("reservation not found"));
-
-
         reservation.setEndDate(dto.getEndDate());
         reservation.setTotalPrice(dto.getTotalPrice());
-
-
-       Reservation savedReservation = reservationRepository.save(reservation);
+        Reservation savedReservation = reservationRepository.save(reservation);
 
         return reservationMap.toDto(savedReservation);
     }
@@ -69,5 +69,16 @@ public class ReservationService {
         Reservation foundCompetence =reservationRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("book not found"));
         return reservationMap.toDto(foundCompetence);
+    }
+
+    public List<Reservation> getReservationsByUserEmail(String email) {
+        return reservationRepository.findByUserEmail(email);
+    }
+
+    public ReservationDto changeStatus(Long id, ReservationStatus status){
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("reservation not found"));
+        reservation.setStatus(status);
+        return reservationMap.toDto(reservationRepository.save(reservation));
     }
 }

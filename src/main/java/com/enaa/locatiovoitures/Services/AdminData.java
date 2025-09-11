@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.enaa.locatiovoitures.Model.Role.ADMIN;
+
 
 @Configuration
 public class AdminData implements CommandLineRunner {
@@ -21,7 +21,7 @@ public class AdminData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        String adminEmail = "admin@enaaskills.com";
+        String adminEmail = "aitloutar@gmail.com";
 
         if (!userRepository.existsByEmail(adminEmail)) {
 

@@ -30,6 +30,10 @@ public class Reservation {
     @JoinColumn(name = "voiture_id", nullable = false)
     private Voiture voiture;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 
     public Long getId() {
@@ -88,5 +92,11 @@ public class Reservation {
         this.voiture = voiture;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,6 +1,8 @@
 package com.enaa.locatiovoitures.Controllers;
 
 import com.enaa.locatiovoitures.Dto.ReservationDto;
+import com.enaa.locatiovoitures.Model.Reservation;
+import com.enaa.locatiovoitures.Model.ReservationStatus;
 import com.enaa.locatiovoitures.Services.ReservationService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +26,8 @@ public class ReservationController {
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
-    @GetMapping
+    @GetMapping("/all")
     public List<ReservationDto> getAll(){
-
         return reservationService.getAll();
     }
 
@@ -45,5 +46,14 @@ public class ReservationController {
     @GetMapping("{id}")
     public ReservationDto getById(@PathVariable Long id){
         return reservationService.getById(id);
+    }
+
+    @GetMapping("/my")
+    public List<Reservation> getReservationByEmail(String email){
+        return reservationService.getReservationsByUserEmail(email);
+    }
+    @PatchMapping("statut/{id}")
+    public ReservationDto changeStatu(@PathVariable Long id,@RequestParam ReservationStatus status){
+        return reservationService.changeStatus(id,status);
     }
 }

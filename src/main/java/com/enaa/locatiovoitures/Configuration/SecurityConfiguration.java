@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/voiture", "/voiture/**").hasAnyAuthority(Role.ADMIN.name(), Role.CLIENT.name())
                         .requestMatchers("/voiture/**").hasAuthority(Role.ADMIN.name())
                         .requestMatchers(HttpMethod.POST,"/reservation").hasAnyAuthority(Role.ADMIN.name(), Role.CLIENT.name())
+                        .requestMatchers(HttpMethod.DELETE, "/reservation/**").hasAnyAuthority(Role.ADMIN.name(), Role.CLIENT.name())
 
                         .anyRequest().authenticated()
                 )
