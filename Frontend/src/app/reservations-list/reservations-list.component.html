@@ -16,7 +16,7 @@
         <td *ngIf="isAdmin" data-label="Client">{{ reservation.clientName }}</td>
         <td data-label="Date de début">{{ reservation.startDate | date:'dd/MM/yyyy' }}</td>
         <td data-label="Date de fin">{{ reservation.endDate | date:'dd/MM/yyyy' }}</td>
-        <td data-label="Prix total">{{ reservation.totalPrice | currency:'EUR' }}</td>
+        <td data-label="Prix total">{{ reservation.totalPrice | currency:'MAD' }}</td>
         <td data-label="Status">{{ reservation.status }}</td>
         <td data-label="Actions" class="actions-cell">
           <button class="btn btn-edit" (click)="onEdit(reservation.id)">Modifier</button>
