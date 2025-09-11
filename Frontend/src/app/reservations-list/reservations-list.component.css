@@ -28,7 +28,7 @@ h2 {
 
 .table thead tr {
   background-color: #ff6b35;
-  color: white;
+  color: black;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -70,7 +70,7 @@ h2 {
 
 .table thead tr {
   background-color: #ff6b35;
-  color: white;
+  color: black;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -99,7 +99,7 @@ h2 {
 .table td {
   padding: 15px 20px;
   font-size: 1em;
-  color: #ecf0f1;
+  color: black;
   vertical-align: middle;
 }
 
@@ -205,7 +205,7 @@ h2 {
 .table td {
   padding: 15px 20px;
   font-size: 1em;
-  color: #ecf0f1;
+  color: black;
 }
 
 
