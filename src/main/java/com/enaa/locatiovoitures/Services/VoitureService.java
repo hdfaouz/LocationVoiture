@@ -31,8 +31,8 @@ public class VoitureService {
     }
 
     public List<VoitureDto> getAllVoitures(){
-    List<Voiture> voitures = voitureRepository.findAll();
-    return voitureMap.toDTOs(voitures);
+        List<Voiture> voitures = voitureRepository.findAll();
+        return voitureMap.toDTOs(voitures);
     }
 
     public void deletVoiture(Long id){
@@ -40,7 +40,7 @@ public class VoitureService {
     }
 
     public VoitureDto update(Long id, VoitureDto dto){
-       Voiture voiture = voitureRepository.findById(id)
+        Voiture voiture = voitureRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Voiture not found"));
 
         voiture.setAvailable(dto.isAvailable());
@@ -50,14 +50,14 @@ public class VoitureService {
         voiture.setPricePerDay(dto.getPricePerDay());
         voiture.setImageUrl(dto.getImageUrl());
 
-       Voiture savedVoiture = voitureRepository.save(voiture);
+        Voiture savedVoiture = voitureRepository.save(voiture);
 
         return voitureMap.toDto(savedVoiture);
     }
 
     public VoitureDto getById(Long id){
-        Voiture foundCompetence =voitureRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("book not found"));
-        return voitureMap.toDto(foundCompetence);
+        Voiture foundVoiture =voitureRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("car not found"));
+        return voitureMap.toDto(foundVoiture);
     }
 }

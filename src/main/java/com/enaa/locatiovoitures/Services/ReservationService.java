@@ -79,4 +79,5 @@ public class ReservationService {
         reservation.setStatus(status);
         return reservationMap.toDto(reservationRepository.save(reservation));
     }
+
 }
