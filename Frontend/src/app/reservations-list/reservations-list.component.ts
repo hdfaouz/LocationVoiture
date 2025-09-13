@@ -35,10 +35,17 @@ export class ReservationsListComponent implements OnInit {
   }
 
   loadReservations(): void {
-    this.reservationService.getAll()
-      .subscribe(reservations => {
-        this.reservations = reservations;
-      });
+    if (this.isAdmin) {
+      this.reservationService.getAll()
+        .subscribe(reservations => {
+          this.reservations = reservations;
+        });
+    } else {
+      this.reservationService.getMyReservations()
+        .subscribe(reservations => {
+          this.reservations = reservations;
+        });
+    }
   }
 
 
