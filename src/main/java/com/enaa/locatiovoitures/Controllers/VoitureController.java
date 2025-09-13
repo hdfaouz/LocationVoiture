@@ -37,7 +37,7 @@ public class VoitureController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public VoitureDto update(@PathVariable Long id, @RequestBody VoitureDto dto){
-       return voitureService.update(id, dto);
+        return voitureService.update(id, dto);
     }
 
     @GetMapping("/{id}")

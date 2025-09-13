@@ -35,7 +35,7 @@ public class ReservationService {
         Reservation reservation = reservationMap.toEntity(reservationDto);
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Client client = (Client) userRepository.findById(userRepository.findByEmail(user.getUsername()).getId())
-                    .orElseThrow(() -> new EntityNotFoundException("Client non trouvé"));
+                .orElseThrow(() -> new EntityNotFoundException("Client non trouvé"));
         reservation.setClient(client);
         Voiture voiture = voitureRepository.findById(reservationDto.getVoitureId()).orElseThrow(() -> new EntityNotFoundException("Voiture non trouvé"));
         reservation.setVoiture(voiture);
