@@ -4,6 +4,7 @@ import com.enaa.locatiovoitures.Dto.ReservationDto;
 import com.enaa.locatiovoitures.Model.Reservation;
 import com.enaa.locatiovoitures.Model.ReservationStatus;
 import com.enaa.locatiovoitures.Services.ReservationService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +25,8 @@ public class ReservationController {
     public ReservationDto ajouter(@RequestBody ReservationDto reservationDto){
         return reservationService.ajouter(reservationDto);
     }
-
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
+    @JsonIgnore
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/all")
     public List<ReservationDto> getAll(){
         return reservationService.getAll();
@@ -47,11 +48,12 @@ public class ReservationController {
     public ReservationDto getById(@PathVariable Long id){
         return reservationService.getById(id);
     }
-
-    @GetMapping("/my")
-    public List<Reservation> getReservationByEmail(String email){
-        return reservationService.getReservationsByUserEmail(email);
+    @JsonIgnore
+    @GetMapping("/my/{id}")
+    public List<Reservation> getReservationByClientId(@PathVariable Long id){
+        return reservationService.getReservationsByClienId(id);
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping("statut/{id}")
     public ReservationDto changeStatu(@PathVariable Long id,@RequestParam ReservationStatus status){
         return reservationService.changeStatus(id,status);

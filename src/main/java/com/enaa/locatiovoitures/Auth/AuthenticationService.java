@@ -40,6 +40,7 @@ public class AuthenticationService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
+        user.setId(request.getId());
 
         userRepository.save(user);
 
@@ -65,14 +66,11 @@ public class AuthenticationService {
         UserDto userDto = new UserDto(
                 user.getEmail(),
                 user.getPassword(),
-                user.getRole()
-
+                user.getRole(),
+                user.getId()
         );
 
         return  new AuthenticationResponse(jwtToken , userDto);
 
-//        AuthenticationResponse response = new AuthenticationResponse();
-//        response.setToken(jwtToken);
-//        return response;
     }
 }

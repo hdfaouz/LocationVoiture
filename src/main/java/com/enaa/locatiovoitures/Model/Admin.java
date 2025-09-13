@@ -18,7 +18,6 @@ public class Admin extends User{
     private List<Voiture> voitures = new ArrayList<>();
 
 
-
     public List<Voiture> getVoitures() {
         return voitures;
     }

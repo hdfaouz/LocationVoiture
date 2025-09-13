@@ -1,5 +1,6 @@
 package com.enaa.locatiovoitures.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -23,16 +24,16 @@ public class Reservation {
     private ReservationStatus status = ReservationStatus.EN_ATTENTE;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "client_id")
     private Client client;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "voiture_id", nullable = false)
     private Voiture voiture;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
 
 
 
@@ -92,11 +93,5 @@ public class Reservation {
         this.voiture = voiture;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

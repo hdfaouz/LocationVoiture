@@ -29,7 +29,6 @@ export class ReservationAComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    //this.loadReservation()
   }
 
   loadReservation(id: number): void {

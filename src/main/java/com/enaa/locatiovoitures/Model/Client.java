@@ -1,5 +1,6 @@
 package com.enaa.locatiovoitures.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Client extends User{
+
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations = new ArrayList<>();
 

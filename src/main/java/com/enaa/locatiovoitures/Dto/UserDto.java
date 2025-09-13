@@ -3,6 +3,7 @@ package com.enaa.locatiovoitures.Dto;
 import com.enaa.locatiovoitures.Model.Role;
 
 public class UserDto {
+    private Long id;
     private String email;
     private String password;
     private Role role;
@@ -10,7 +11,8 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(String email, String password, Role role) {
+    public UserDto(String email, String password, Role role, Long id) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -41,5 +43,13 @@ public class UserDto {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

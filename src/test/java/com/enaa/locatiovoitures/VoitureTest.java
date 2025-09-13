@@ -129,7 +129,6 @@ public class VoitureTest {
 
         Long voitureId = 1L;
         voitureService.deletVoiture(voitureId);
-
         verify(voitureRepository).deleteById(voitureId);
     }
 

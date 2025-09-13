@@ -45,7 +45,7 @@ public class ReservationTest {
     private ReservationMap reservationMap;
 
     @InjectMocks
-    private ReservationService reservationService; // Remplacez par le nom de votre service
+    private ReservationService reservationService;
 
     @Test
     void AjouterReservation() {

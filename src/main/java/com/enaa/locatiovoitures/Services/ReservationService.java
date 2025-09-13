@@ -39,9 +39,7 @@ public class ReservationService {
         reservation.setClient(client);
         Voiture voiture = voitureRepository.findById(reservationDto.getVoitureId()).orElseThrow(() -> new EntityNotFoundException("Voiture non trouvé"));
         reservation.setVoiture(voiture);
-        if (reservationDto.getStatus()== null){
-            reservation.setStatus(ReservationStatus.EN_ATTENTE);
-        }
+        reservation.setStatus(ReservationStatus.EN_ATTENTE);
         Reservation saveReservation = reservationRepository.save(reservation);
         return reservationMap.toDto(saveReservation);
     }
@@ -52,9 +50,9 @@ public class ReservationService {
     }
 
     public void deletReservation(Long id){
-
         reservationRepository.deleteById(id);
     }
+
     public ReservationDto update(Long id, ReservationDto dto){
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("reservation not found"));
@@ -71,8 +69,8 @@ public class ReservationService {
         return reservationMap.toDto(foundCompetence);
     }
 
-    public List<Reservation> getReservationsByUserEmail(String email) {
-        return reservationRepository.findByUserEmail(email);
+    public List<Reservation> getReservationsByClienId(Long id) {
+        return reservationRepository.findReservationByClient_Id(id);
     }
 
     public ReservationDto changeStatus(Long id, ReservationStatus status){
