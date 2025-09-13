@@ -3,11 +3,11 @@
   <form (ngSubmit)="addReservation()">
     <div class="form-group">
       <label for="startDate">Date de début</label>
-      <input type="date" class="form-control" id="startDate" [(ngModel)]="reservation.startDate" name="startDate" required>
+      <input type="date" class="form-control" id="startDate" [(ngModel)]="reservation.startDate"  name="startDate" [attr.min]="minStartDate"  required>
     </div>
     <div class="form-group">
       <label for="endDate">Date de fin</label>
-      <input (mouseleave)="calcul()"  type="date" class="form-control" id="endDate" [(ngModel)]="reservation.endDate" name="endDate" required>
+      <input (mouseleave)="calcul()"  type="date" class="form-control" id="endDate" [(ngModel)]="reservation.endDate" name="endDate" [attr.min]="minEndDate(reservation.startDate)" required>
     </div>
 
     <div class="form-group">

@@ -4,6 +4,15 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {AuthService} from "../services/auth.service";
 
+interface Reservation {
+  id: number;
+  startDate: Date;
+  endDate: Date;
+  totalPrice: number;
+  status: string;
+  clientId: number;
+  voitureId: number;
+}
 @Component({
   selector: 'app-reservations-list',
   standalone: true,
@@ -13,15 +22,16 @@ import {AuthService} from "../services/auth.service";
 })
 export class ReservationsListComponent implements OnInit {
 
-  reservations: any[] = [];
+  reservations !: Reservation[] ;
   isAdmin: boolean = false;
 
-  constructor(private reservationService: ReservationService, private router: Router, private auth : AuthService ) { 
+  constructor(private reservationService: ReservationService, private router: Router, private auth : AuthService ) {
     this.isAdmin = this.auth.isAdmin();
   }
 
   ngOnInit(): void {
-    this.loadReservations();
+    this.loadReservations()
+
   }
 
   loadReservations(): void {
@@ -30,6 +40,7 @@ export class ReservationsListComponent implements OnInit {
         this.reservations = reservations;
       });
   }
+
 
   onEdit(id: number): void {
     console.log('Editing reservation with id:', id);
@@ -44,5 +55,23 @@ export class ReservationsListComponent implements OnInit {
         console.error('Error deleting reservation:', error);
       });
     }
+  }
+
+  onConfirm(id: number): void {
+    this.reservationService.changeStatus(id, 'CONFIRMEE').subscribe(updatedReservation => {
+      const index = this.reservations.findIndex(r => r.id === id);
+      if (index !== -1) {
+        this.reservations[index] = updatedReservation;
+      }
+    });
+  }
+
+  onRefuse(id: number): void {
+    this.reservationService.changeStatus(id, 'REFUSEE').subscribe(updatedReservation => {
+      const index = this.reservations.findIndex(r => r.id === id);
+      if (index !== -1) {
+        this.reservations[index] = updatedReservation;
+      }
+    });
   }
 }

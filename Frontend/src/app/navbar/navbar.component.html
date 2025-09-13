@@ -6,7 +6,8 @@
     <a href="/home" routerLinkActive="active">Home</a>
     <a  *ngIf="role === 'ADMIN'" routerLink="/add" routerLinkActive="active">Rentals</a>
     <a routerLink="/cars" routerLinkActive="active">cars</a>
-    <a routerLink="/reservations" routerLinkActive="active">reservations</a>
+    <a *ngIf="role ==='ADMIN'" routerLink="/reservations" routerLinkActive="active">reservations</a>
+    <a *ngIf="role ==='CLIENT'" routerLink="/reservations" routerLinkActive="active">reservation</a>
     <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
     <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
       <button class="login-btn">Login</button>

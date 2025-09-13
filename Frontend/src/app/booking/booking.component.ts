@@ -54,9 +54,6 @@ export class BookingComponent implements OnInit {
       });
   }
   calcul(){
-
-
-
     const date1 : Date= new Date(this.reservation.startDate);
     const date2 : Date= new Date(this.reservation.endDate);
 
@@ -66,5 +63,17 @@ export class BookingComponent implements OnInit {
     this.reservation.totalPrice = diffDays * this.prix
 
   }
+
+  minStartDate = (() => {
+    const d = new Date(); d.setDate(d.getDate() + 1);
+    return d.toLocaleDateString('sv-SE');
+  })();
+
+
+  minEndDate = (start: string | Date) => {
+    const d = start ? new Date(start) : new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toLocaleDateString('sv-SE');
+  };
 
 }

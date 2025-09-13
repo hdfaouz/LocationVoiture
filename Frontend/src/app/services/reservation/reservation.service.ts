@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {  Observable } from "rxjs";
 
-export interface Reservation {
+interface Reservation {
   id: number;
-  carId: number;
-  userId: string;
   startDate: Date;
   endDate: Date;
   totalPrice: number;
   status: string;
+  clientId: number;
+  voitureId: number;
 }
 
 @Injectable({
@@ -29,8 +29,15 @@ export class ReservationService {
   getAll(): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.apiUrl}/all`);
   }
+  getAllRe(id: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/my/${id}`);
+  }
 
   deleteReservation(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  changeStatus(id: number, status: string): Observable<Reservation> {
+    return this.http.patch<Reservation>(`${this.apiUrl}/statut/${id}?status=${status}`, {});
   }
 }
