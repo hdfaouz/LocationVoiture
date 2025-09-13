@@ -69,8 +69,8 @@ public class ReservationService {
         return reservationMap.toDto(foundCompetence);
     }
 
-    public List<Reservation> getReservationsByClienId(Long id) {
-        return reservationRepository.findReservationByClient_Id(id);
+    public List<ReservationDto> getReservationsByClientId(Long id) {
+        return reservationMap.toDTOs(reservationRepository.findReservationByClient_Id(id));
     }
 
     public ReservationDto changeStatus(Long id, ReservationStatus status){

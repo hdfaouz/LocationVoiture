@@ -3,9 +3,13 @@ package com.enaa.locatiovoitures.Controllers;
 import com.enaa.locatiovoitures.Dto.ReservationDto;
 import com.enaa.locatiovoitures.Model.Reservation;
 import com.enaa.locatiovoitures.Model.ReservationStatus;
+import com.enaa.locatiovoitures.Model.User;
+import com.enaa.locatiovoitures.Repositories.UserRepository;
 import com.enaa.locatiovoitures.Services.ReservationService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +20,11 @@ import java.util.List;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final UserRepository userRepository;
 
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, UserRepository userRepository) {
         this.reservationService = reservationService;
+        this.userRepository = userRepository;
     }
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     @PostMapping
@@ -48,10 +54,18 @@ public class ReservationController {
     public ReservationDto getById(@PathVariable Long id){
         return reservationService.getById(id);
     }
-    @JsonIgnore
     @GetMapping("/my/{id}")
-    public List<Reservation> getReservationByClientId(@PathVariable Long id){
-        return reservationService.getReservationsByClienId(id);
+    public List<ReservationDto> getReservationByClientId(@PathVariable Long id){
+        return reservationService.getReservationsByClientId(id);
+    }
+
+    @PreAuthorize("hasAuthority('CLIENT')")
+    @GetMapping("/my-reservations")
+    public List<ReservationDto> getMyReservations() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = userDetails.getUsername();
+        User user = userRepository.findByEmail(email);
+        return reservationService.getReservationsByClientId(user.getId());
     }
     @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping("statut/{id}")
