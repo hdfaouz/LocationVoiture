@@ -49,11 +49,6 @@ export class ReservationsListComponent implements OnInit {
   }
 
 
-  onEdit(id: number): void {
-    console.log('Editing reservation with id:', id);
-
-  }
-
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')) {
       this.reservationService.deleteReservation(id).subscribe(() => {

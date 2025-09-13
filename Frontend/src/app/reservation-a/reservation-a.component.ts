@@ -14,12 +14,12 @@ interface Reservation {
 @Component({
   selector: 'app-reservation-a',
   standalone: true,
-    imports: [
-        CurrencyPipe,
-        DatePipe,
-        NgForOf,
+  imports: [
+    CurrencyPipe,
+    DatePipe,
+    NgForOf,
 
-    ],
+  ],
   templateUrl: './reservation-a.component.html',
   styleUrl: './reservation-a.component.css'
 })

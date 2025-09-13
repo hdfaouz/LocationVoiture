@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Mes réservations</h2>
+  <h2>Les réservations</h2>
   <table class="table">
     <thead>
       <tr>
@@ -21,7 +21,6 @@
         <td data-label="Prix total">{{ reservation.totalPrice | currency:'MAD' }}</td>
         <td data-label="Status">{{ reservation.status }}</td>
         <td data-label="Actions" class="actions-cell">
-          <button class="btn btn-edit" (click)="onEdit(reservation.id)">Modifier</button>
           <button class="btn btn-delete" (click)="onDelete(reservation.id)">Supprimer</button>
           <ng-container *ngIf="isAdmin && reservation.status == 'EN_ATTENTE'">
             <button class="btn btn-confirm" (click)="onConfirm(reservation.id)">Confirmer</button>
