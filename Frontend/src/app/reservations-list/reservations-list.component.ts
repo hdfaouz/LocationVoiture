@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReservationService } from '../services/reservation/reservation.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import {AuthService} from "../services/auth.service";
+import { AuthService } from "../services/auth.service";
+import { interval, Subscription } from 'rxjs';
 
 interface Reservation {
   id: number;
@@ -13,6 +14,7 @@ interface Reservation {
   clientId: number;
   voitureId: number;
 }
+
 @Component({
   selector: 'app-reservations-list',
   standalone: true,
@@ -20,18 +22,48 @@ interface Reservation {
   templateUrl: './reservations-list.component.html',
   styleUrls: ['./reservations-list.component.css']
 })
-export class ReservationsListComponent implements OnInit {
+export class ReservationsListComponent implements OnInit, OnDestroy {
 
-  reservations !: Reservation[] ;
+  reservations: Reservation[] = [];
   isAdmin: boolean = false;
+  private pollingSubscription?: Subscription;
 
-  constructor(private reservationService: ReservationService, private router: Router, private auth : AuthService ) {
+  constructor(private reservationService: ReservationService, private router: Router, private auth: AuthService) {
     this.isAdmin = this.auth.isAdmin();
   }
 
   ngOnInit(): void {
-    this.loadReservations()
+    this.loadReservations();
+    if (!this.isAdmin) {
+      this.startPolling();
+    }
+  }
 
+  ngOnDestroy(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+    }
+  }
+
+  startPolling(): void {
+    this.pollingSubscription = interval(10000)
+      .subscribe(() => {
+        this.checkForUpdates();
+      });
+  }
+
+  checkForUpdates(): void {
+    this.reservationService.getMyReservations().subscribe(newReservations => {
+      if (this.reservations && this.reservations.length > 0) {
+        newReservations.forEach(newRes => {
+          const oldRes = this.reservations.find(r => r.id === newRes.id);
+          if (oldRes && oldRes.status === 'EN_ATTENTE' && newRes.status !== 'EN_ATTENTE') {
+            alert(`Le statut de votre réservation pour la voiture ${newRes.voitureId} est passé à : ${newRes.status}`);
+          }
+        });
+      }
+      this.reservations = newReservations;
+    });
   }
 
   loadReservations(): void {
@@ -47,7 +79,6 @@ export class ReservationsListComponent implements OnInit {
         });
     }
   }
-
 
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')) {

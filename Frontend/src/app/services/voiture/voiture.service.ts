@@ -52,7 +52,7 @@ export class VoitureService {
   addCar(car: Car): Observable<any> {
     return this.http.post<any>(this.apiUrl, car, {
       headers: this.getHeaders(),
-      withCredentials: true // Important pour CORS
+      withCredentials: true
     }).pipe(
       catchError(this.handleError)
     );

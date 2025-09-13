@@ -24,8 +24,7 @@ export const routes: Routes = [
   { path: 'detail/:id', component: DetailsComponent, canActivate: [authGuard] },
   { path: 'contact', component: ContactUsComponent, canActivate: [authGuard] },
   { path: 'about', component: AboutUsComponent, canActivate: [authGuard] },
-  { path: 'reservations', component: ReservationsListComponent, canActivate: [authGuard] },
-  { path: 'reservations', component: ReservationAComponent, canActivate: [authGuard] },
+  { path: 'reservations', component: ReservationsListComponent, canActivate: [authGuard] }
 
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
