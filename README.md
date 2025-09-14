@@ -95,3 +95,6 @@ Validation ou refus des demandes de réservation
 **_Diagramme de sequence**_ 
 ![Diagrammes de séquence](Diagrammes/diagramme%20de%20sequence.png)
 ![Diagrammes de séquence](Diagrammes/diagramme%20de%20sequence%202.png)
+
+-----------------------------------------------------------------------------------------------
+### **_swagger_**:http://localhost:8080/swagger-ui/index.html#/
