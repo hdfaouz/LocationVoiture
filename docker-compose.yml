@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: carrental-mysql
+    environment:
+      MYSQL_DATABASE: CarRental
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - carrental-network
+
+
+  app:
+    build: .
+    container_name: carrental-app
+    depends_on:
+      - mysql-db
+    environment:
+
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/CarRental?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: appuser
+      SPRING_DATASOURCE_PASSWORD: apppassword
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - carrental-network
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+volumes:
+  mysql_data:
+
+# Réseau pour la communication entre les services
+networks:
+  carrental-network:
+    driver: bridge
