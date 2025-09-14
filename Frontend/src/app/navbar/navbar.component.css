@@ -64,3 +64,79 @@
 .login-btn:hover {
   background-color: #e55a2b;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .nav-bar {
+    padding: 16px 30px;
+  }
+
+  .links {
+    gap: 24px;
+  }
+
+  .links a {
+    font-size: 16px;
+  }
+
+  .login-btn {
+    font-size: 16px;
+    padding: 8px 18px;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .nav-bar {
+    padding: 16px 20px;
+  }
+
+  .logo-img {
+    height: 50px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
+
+  .links {
+    gap: 20px;
+  }
+
+  .links a {
+    font-size: 14px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .nav-bar {
+    padding: 12px 15px;
+  }
+
+  .logo-img {
+    height: 40px;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .links {
+    gap: 15px;
+  }
+
+  .links a {
+    font-size: 12px;
+  }
+
+  .login-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
