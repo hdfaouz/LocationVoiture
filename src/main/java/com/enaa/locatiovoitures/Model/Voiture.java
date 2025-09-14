@@ -1,6 +1,6 @@
 package com.enaa.locatiovoitures.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -23,7 +23,7 @@ public class Voiture {
     private boolean available;
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "admin_id", nullable = false)
     private Admin admin;
 

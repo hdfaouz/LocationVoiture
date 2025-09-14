@@ -18,6 +18,7 @@ public class VoitureController {
     }
 
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public VoitureDto ajouterVoiture(@RequestBody VoitureDto voitureDto){
         return voitureService.ajouterVoiture(voitureDto);
