@@ -54,7 +54,7 @@ export class AddComponent {
       category: ['', [Validators.required]],
       pricePerDay: [0, [Validators.required, Validators.min(1)]],
       available: [true],
-      imageUrl: ['', [Validators.pattern(/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i)]]
+      imageUrl: ['']
     });
   }
 

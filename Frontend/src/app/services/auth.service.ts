@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+
 
 export interface RegisterRequest {
   name: string;
@@ -64,7 +65,11 @@ export class AuthService {
   }
 
   login(credentials: {email: string, password: string}): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`, credentials);
+    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`, credentials).pipe(
+      tap((response:any)=>{
+        localStorage.setItem('auth_token', response);
+      })
+    );
   }
 
   register(userdata: {name: string, email: string, password: string, role: string}): Observable<any> {
@@ -73,7 +78,7 @@ export class AuthService {
 
   saveUserData(response: LoginResponse): void {
     if (response?.token && response?.user) {
-      localStorage.setItem('token', response.token);
+      localStorage.setItem('auth_token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
       this.currentUserSubject.next(response.user);
     } else {
@@ -94,7 +99,7 @@ export class AuthService {
 
   logout(): void {
     console.log('Logout appelé');
-    localStorage.removeItem('token');
+    localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     localStorage.removeItem('role');
     this.currentUserSubject.next(null);
@@ -106,16 +111,7 @@ export class AuthService {
     return user ? user.role : null;
   }
 
-  saveToken(token: string): void {
-    if (token && token !== 'undefined') {
-      localStorage.setItem('auth_token', token);
-    }
-  }
 
-  getToken(): string | null {
-    const token = localStorage.getItem('auth_token');
-    return (token && token !== 'undefined' && token !== 'null') ? token : null;
-  }
 
   saveRole(role: string): void {
     if (role && role !== 'undefined') {
@@ -124,5 +120,10 @@ export class AuthService {
   }
   isAdmin(): boolean {
     return this.getRole() === 'ADMIN';
+  }
+  saveToken(token: string): void {
+    if (token && token !== 'undefined') {
+      localStorage.setItem('auth_token', token);
+    }
   }
 }
