@@ -48,7 +48,7 @@ services:
 volumes:
   mysql_data:
 
-# Réseau pour la communication entre les services
+
 networks:
   carrental-network:
     driver: bridge
